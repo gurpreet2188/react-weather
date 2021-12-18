@@ -1,0 +1,28 @@
+.svg-common {
+    stroke-width: 1.5;
+    fill: transparent;
+    stroke: #000;
+}
+
+.svg-dash {
+    stroke-dasharray: 2.3;
+    stroke-dashoffset: 1;
+    transform-origin: center;
+    animation: SunRotate 15s infinite linear;
+}
+
+.svg-translate {
+    animation: TranslateX 15s infinite linear;
+}
+
+@keyframes SunRotate {
+    0%{transform: scaleX(100%) scaleY(100%) rotate(0deg);}
+    50%{transform: scaleX(80%) scaleY(80%) rotate(180deg);}
+    100%{transform: scaleX(100%) scaleY(100%) rotate(360deg);}
+}
+
+@keyframes TranslateX {
+    0%{transform: translateX(-8%);}
+    50%{transform: translateX(0%);}
+    100%{transform: translateX(-8%);}
+}

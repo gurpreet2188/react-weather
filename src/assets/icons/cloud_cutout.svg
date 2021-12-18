@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Gravit.io -->
+
+<svg
+   style="isolation:isolate"
+   viewBox="0 0 24 24"
+   width="24pt"
+   height="24pt"
+   version="1.1"
+   id="svg17"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5">
+    <clipPath
+       id="_clipPath_4tODKee1rHPZDiZ3m4HsTgllPOGM2qGy">
+      <rect
+         width="24"
+         height="24"
+         id="rect2" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#_clipPath_4tODKee1rHPZDiZ3m4HsTgllPOGM2qGy)"
+     id="g15">
+    <path
+       id="rect1665"
+       style="fill:#ebebeb;fill-opacity:0.50813;stroke:none;stroke-width:6.50137;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0,-0.05273437 V 31.947266 H 10.289062 C 5.5440229,31.284741 1.8139292,27.555444 1.1503906,22.810547 1.1506811,16.886866 5.9532725,12.08515 11.876953,12.085938 c 4.013936,0.01393 6.703161,2.183022 8.530762,5.75678 0.659859,-0.393459 0.817263,-0.806085 2.062988,-0.997015 4.550378,-0.07522 8.240341,3.689235 8.240235,8.240235 -0.555216,3.534037 -3.327292,6.306112 -6.861329,6.861328 H 32 V -0.05273437 Z M 10.289062,31.947266 c 2.289063,-0.0091 -4.6484373,0.03841 0,0 z"
+       transform="scale(0.75)" />
+    <path
+       d="m 8.809858,11.011436 c -3.3018815,0 -5.9794728,2.71458 -5.9794728,6.063373 0,3.348794 2.6775913,6.063373 5.9794728,6.063373 6.533395,-0.03879 4.665035,-0.02165 7.920005,-0.02075 2.366348,0 4.283424,-1.945043 4.283424,-4.343869 -9.02e-4,-2.397924 -1.917978,-4.342064 -4.283424,-4.342064 -0.802015,9.02e-4 -1.588693,0.230951 -2.268014,0.663082 -0.832688,-2.443932 -3.102506,-4.083145 -5.651991,-4.083145 z"
+       fill-rule="evenodd"
+       fill="#000000"
+       fill-opacity="0.54878"
+       id="path11"
+       style="fill:none;stroke:#000000;stroke-width:1.35323;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

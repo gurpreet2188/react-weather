@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Base } from './components/base';
+import './styles/font.css'
+import './styles/anim.css'
+import './styles/common.css'
+import './styles/icon.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <Base/>
+    )
 }
+    
 
-export default App;
+export default App

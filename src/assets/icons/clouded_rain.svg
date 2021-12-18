@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Gravit.io -->
+
+<svg
+   style="isolation:isolate"
+   viewBox="0 0 24 24"
+   width="24pt"
+   height="24pt"
+   version="1.1"
+   id="svg17"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5">
+    <clipPath
+       id="_clipPath_4tODKee1rHPZDiZ3m4HsTgllPOGM2qGy">
+      <rect
+         width="24"
+         height="24"
+         id="rect2" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#_clipPath_4tODKee1rHPZDiZ3m4HsTgllPOGM2qGy)"
+     id="g15">
+    <path
+       d="m 16.156485,1.8491703 c 3.713831,0 6.725483,3.0532759 6.725483,6.8198947 0,3.76662 -3.011652,6.819895 -6.725483,6.819895 -7.3485135,-0.04363 -5.247054,-0.02435 -8.9081198,-0.02334 -2.6615775,0 -4.8178321,-2.187724 -4.8178321,-4.885849 10e-4,-2.6971116 2.1572686,-4.8838203 4.8178321,-4.8838203 0.9020764,0.00101 1.7869019,0.2597665 2.5509758,0.7458142 0.936576,-2.7488584 3.489581,-4.5925946 6.357144,-4.5925946 z"
+       fill-rule="evenodd"
+       fill="#000000"
+       fill-opacity="0.54878"
+       id="path11-5"
+       style="isolation:isolate;fill:none;stroke:#000000;stroke-width:1.52207;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 3.0190224,26.432684 C 8.307073,15.321661 8.34802,15.233849 8.34802,15.233849"
+       id="path4506" />
+    <path
+       style="isolation:isolate;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 6.1467423,26.784245 C 11.434793,15.673222 11.47574,15.58541 11.47574,15.58541"
+       id="path4506-1" />
+    <path
+       style="isolation:isolate;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 9.6154922,26.45612 C 14.903543,15.345097 14.94449,15.257285 14.94449,15.257285"
+       id="path4506-1-2" />
+    <path
+       style="isolation:isolate;fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 13.084242,26.26862 C 18.372293,15.157597 18.41324,15.069785 18.41324,15.069785"
+       id="path4506-1-2-7" />
+  </g>
+</svg>

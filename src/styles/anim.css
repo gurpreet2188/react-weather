@@ -1,0 +1,8 @@
+@keyframes Rotate {
+    0%{transform: rotate(360deg);}
+}
+
+.rotate {
+    transform-origin: center;
+    animation: Rotate 20s infinite;
+}
