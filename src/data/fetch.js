@@ -9,7 +9,7 @@ export function GetData() {
     const date = new Date()
     const getData = () => {
         axios.all([
-            axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
+            axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
             axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
         ]).then(axios.spread((name, main) => {
             localStorage.setItem('name', name.data[0]?.name)
