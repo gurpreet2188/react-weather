@@ -3,25 +3,21 @@ import { useContext, useEffect } from 'react';
 import { globalStat, globalCount } from '../components/base';
 import { useLoction } from './location';
 export function GetData() {
-    // const {data, setData, locName, setLocName} = useContext(globalData)
     const {setStat} = useContext(globalStat)
     const {count, setCount} = useContext(globalCount)
     const {lat, lon} = useLoction()
     const date = new Date()
     const getData = () => {
-        axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
-                .then(res => {
-                    localStorage.setItem('ow_api', JSON.stringify(res.data))
-                    setStat(true)
-                    setCount(count+ 1)
-                })
-
-                axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`)
-                .then(res => {
-                    localStorage.setItem('name', res.data[0]?.name)
-                })
-        // localStorage.setItem('ow_api', JSON.stringify("test"))
-        console.log("testing")
+        axios.all([
+            axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
+            axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
+        ]).then(axios.spread((name, main) => {
+            localStorage.setItem('name', name.data[0]?.name)
+            localStorage.setItem('ow_api', JSON.stringify(main.data))
+            setStat(true)
+            setCount(count+ 1)
+            console.log(name.data)
+        }))
     }
 
     useEffect(() => {
