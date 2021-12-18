@@ -21,19 +21,21 @@ export function GetData() {
     }
 
     useEffect(() => {
+        console.log(localStorage.getItem('name'))
         if(lat && lon) {
-            console.log(date.getTime())
-            if(localStorage.getItem('time')) {
+            if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') ) {
                 if(parseInt(localStorage.getItem('time')) < parseInt(date.getTime()) - 60000) {
                    
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
                     getData()
-                } else {
-                    console.log(false)
                 }
-
+            } else if(localStorage.getItem('time') && (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null)){
+                localStorage.setItem('time', JSON.stringify(date.getTime()))
+                console.log('testing name')
+                getData()
             } else {
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
+                console.log('testing data')
                 getData()
             }
             
