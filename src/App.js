@@ -8,7 +8,10 @@ import './styles/icon.css'
 
 const App = () => {
     return (
+        <>
+            {/* Test */}
         <Base/>
+        </>
     )
 }
     

@@ -1,23 +1,22 @@
 import axios from 'axios';
-import { useContext } from 'react';
-import { useEffect} from 'react/cjs/react.development';
+import { useContext, useEffect } from 'react';
 import { globalStat, globalCount } from '../components/base';
-// import { useLoction } from './location';
+import { useLoction } from './location';
 export function GetData() {
     // const {data, setData, locName, setLocName} = useContext(globalData)
     const {setStat} = useContext(globalStat)
     const {count, setCount} = useContext(globalCount)
-    // const {lat, lon} = useLoction()
+    const {lat, lon} = useLoction()
     const date = new Date()
     const getData = () => {
-        axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${1.4107333}&lon=${103.8796131}&units=metric&appid=${process.env.REACT_APP_KEY}`)
+        axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
                 .then(res => {
                     localStorage.setItem('ow_api', JSON.stringify(res.data))
                     setStat(true)
                     setCount(count+ 1)
                 })
 
-                axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${1.4107333}&lon=${103.8796131}&limit=3&appid=${process.env.REACT_APP_KEY}`)
+                axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`)
                 .then(res => {
                     localStorage.setItem('name', res.data[0]?.name)
                 })
@@ -26,7 +25,7 @@ export function GetData() {
     }
 
     useEffect(() => {
-        // if(lat && lon) {
+        if(lat && lon) {
             console.log(date.getTime())
             if(localStorage.getItem('time')) {
                 if(parseInt(localStorage.getItem('time')) < parseInt(date.getTime()) - 60000) {
@@ -42,7 +41,7 @@ export function GetData() {
                 getData()
             }
             
-        // }
+        }
     
     })
     console.log(count)
