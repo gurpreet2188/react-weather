@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { IconClouded } from '../assets/icon-components/clouded';
 import { IconCloudedSun } from '../assets/icon-components/cloudedSun'
 import { IconArrow } from '../assets/icon-components/arrow'
-import { globalCount, globalData } from './base';
+import { globalData } from './base';
 export function Current() {
     const size = { w: 230, h: 230 }
     // const windDirection = (deg) => {
@@ -28,7 +28,7 @@ export function Current() {
     //     }
     // }
 
-    const { red, blue, green, setRed, setBlue, setGreen } = useContext(globalData)
+    const { setRed, setBlue, setGreen } = useContext(globalData)
     const data = JSON.parse((localStorage.getItem('ow_api')))
     console.log(data)
     const sunrise = new Date(data.current?.sunrise)
@@ -48,7 +48,7 @@ export function Current() {
             setGreen(255)
             setBlue(255)
         }
-    }, [])
+    })
 
     return (
         <div className='content-flex'>

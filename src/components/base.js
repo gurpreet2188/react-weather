@@ -16,7 +16,7 @@ export function Base() {
     const [green, setGreen] = useState(0)
    
     return (
-            <globalStat.Provider value={stat, setStat}>
+            <globalStat.Provider value={{stat, setStat}}>
                 <globalCount.Provider value={{ count, setCount }}>
                     <globalData.Provider value={{ data, setData, red, blue, green, setRed, setBlue, setGreen}}>
 
