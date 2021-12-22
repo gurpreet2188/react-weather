@@ -18,15 +18,15 @@ export function GetData() {
             setCount(count+ 1)
         }))
     }
-
     useEffect(() => {
         if(lat && lon) {
             if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') ) {
-                if(parseInt(localStorage.getItem('time')) < date.getTime() - 1800000) {
+                if(parseInt(parseInt(localStorage.getItem('time'))) < date.getTime() - 1800000) {
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
+                    console.log("test")
                     getData()
                 }
-            } else if(localStorage.getItem('time') && (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null)){
+            } else if(localStorage.getItem('time') === null || (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null)){
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
                 getData()
             } else {
@@ -36,7 +36,7 @@ export function GetData() {
             
         }
     
-    })
+    },[])
     return (
         <></>
     )

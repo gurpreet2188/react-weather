@@ -25,9 +25,9 @@ export function Base() {
 
                         <GetData />
                         <div className='home-flex' style={{background:`linear-gradient(180deg,rgb(${red},${blue},${green}), rgb(255,255,255))`}}>
-                            {localStorage.getItem('time') ? <Header/> : 'error'}
-                            {localStorage.getItem('time') ? <Current/> : 'error'}
-                            {localStorage.getItem('time') ? <Hourly/> : 'error'}
+                            {localStorage.getItem('time') ? <Header/> : 'Please grant the location permission'}
+                            {localStorage.getItem('time') ? <Current/> : ''}
+                            {localStorage.getItem('time') ? <Hourly/> : ''}
                             {/* <Graphs/> */}
                         </div>
                     </globalData.Provider>

@@ -250,7 +250,8 @@ html, body {
     flex-direction: row;
     gap: 1.5rem;
     overflow-x: scroll;
-    padding: 1rem 0 1rem 1rem;
+    align-self: center;
+    padding-top: 1rem;
 }
 
 .forecast-title {
