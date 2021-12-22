@@ -12,7 +12,7 @@ export function GetData() {
             axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
             axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
         ]).then(axios.spread((name, main) => {
-            localStorage.setItem('name', name.data[0]?.name)
+            localStorage.setItem('name', JSON.stringify(name.data[0]))
             localStorage.setItem('ow_api', JSON.stringify(main.data))
             setStat(true)
             setCount(count+ 1)
