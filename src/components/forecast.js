@@ -3,7 +3,7 @@ import { IconClouded } from "../assets/icon-components/clouded"
 import { IconCloudedSun } from "../assets/icon-components/cloudedSun"
 import { IconSun } from "../assets/icon-components/sun"
 
-export function Hourly() {
+export function Forecast() {
     const data = JSON.parse((localStorage.getItem('ow_api')))
     const size = { w: 24, h: 24 }
     const [type, setType] = useState("h")
@@ -15,15 +15,11 @@ export function Hourly() {
                 <div className="forecast-select" onClick={switchType}>
                     <h3 className={type === "h" ? "forecast-selected" : "forecast-not-selected"}>Hourly</h3>
                     <h3 className={type === "d" ? "forecast-selected" : "forecast-not-selected"}>Daily</h3>
-
                 </div>
-
             </div>
             <div className="forecast">
                 {type === "h" ? data?.hourly.map((m, i) => {
-
-                    if (i >= 0 && i <= 6) {
-                        if (new Date().getHours() < new Date(m.dt * 1000).getHours()) {
+                    if (i >= 0 && i <= 5) {
                             return <div key={i} className="forecast-content">
                                 <p className="forecast-content-text">{parseInt(m.temp)}&deg;</p>
                                 <div className="forecast-icons">
@@ -33,7 +29,6 @@ export function Hourly() {
                                 </div>
                                 <p className="forecast-content-text">{new Date(m.dt * 1000).getHours()}</p>
                             </div>
-                        }
                     }
                 }) : type === "d" ? data?.daily.map((m, i) => {
 

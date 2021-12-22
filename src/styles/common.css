@@ -61,6 +61,7 @@ html, body {
 
 .home-flex {
     height: 100vh;
+    overflow: hidden;
 }
 
 .home-flex, .content-flex {
@@ -68,6 +69,7 @@ html, body {
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
+    overflow: hidden;
     /* margin-top: 1rem; */
 }
 
@@ -281,6 +283,17 @@ html, body {
 .forecast::-webkit-scrollbar {
     display: none;
 }
+
+.graphs {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    overflow-y: hidden;
+}
+
+/* .graph-dataline {
+    stroke: linear-gradient(180deg,rgb(255,255,255), rgb(255,255,255));
+} */
 
 .div-bg {
     /* background-color: turquoise; */

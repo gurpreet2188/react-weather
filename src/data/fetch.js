@@ -7,6 +7,7 @@ export function GetData() {
     const {count, setCount} = useContext(globalCount)
     const {lat, lon} = useLoction()
     const date = new Date()
+    console.log("running")
     const getData = () => {
         axios.all([
             axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
@@ -19,9 +20,10 @@ export function GetData() {
         }))
     }
     useEffect(() => {
+        console.log(parseInt(localStorage.getItem('time')), date.getTime() - 1800000 )
         if(lat && lon) {
             if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') ) {
-                if(parseInt(parseInt(localStorage.getItem('time'))) < date.getTime() - 1800000) {
+                if(parseInt(localStorage.getItem('time')) < date.getTime() - 1800000) {
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
                     console.log("test")
                     getData()
@@ -36,7 +38,7 @@ export function GetData() {
             
         }
     
-    },[])
+    },[lon])
     return (
         <></>
     )

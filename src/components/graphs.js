@@ -6,7 +6,7 @@ export function Graphs() {
     const [points, setPoints] = useState("")
     const [humidity, setHumidity] = useState("")
     const [uv, setUV] = useState("")
-    const xScale = [50, 85, 120, 155, 190, 225, 260, 295]
+    const xScale = [46, 85, 120, 155, 190, 225, 260, 295]
     const yScale = [10, 50, 95]
     const pctY = ["100%", "50%", "0%"].map((m,i)=>{ return <text key={i} x="0" y={yScale[i]}>{m}</text>})
     const uviY = ["12", "5", "0"].map((m,i)=>{ return <text key={i} x="0" y={yScale[i]}>{m}</text>})
@@ -21,10 +21,10 @@ export function Graphs() {
     
     
     return (
-        <>
+        <div className='graphs'>
             <Graph type="Chances of Rain" points={points} axisX={dates} axisY={pctY}/>
-            <Graph type="Humidity" points={humidity} axisX={dates} axisY={pctY}/>
-            <Graph type="UVI" points={uv} axisX={dates} axisY={uviY}/>
-        </>
+            {/* <Graph type="Humidity" points={humidity} axisX={dates} axisY={pctY}/> */}
+            {/* <Graph type="UVI" points={uv} axisX={dates} axisY={uviY}/> */}
+        </div>
     )
 }
