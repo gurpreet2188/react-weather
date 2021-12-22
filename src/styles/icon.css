@@ -7,6 +7,10 @@
 .svg-dash {
     stroke-dasharray: 2.3;
     stroke-dashoffset: 1;
+    
+}
+
+.dash-anim {
     transform-origin: center;
     animation: SunRotate 15s linear;
 }

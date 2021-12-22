@@ -24,11 +24,11 @@ export function Base() {
                     <globalData.Provider value={{ data, setData, red, blue, green, setRed, setBlue, setGreen}}>
 
                         <GetData />
-                        <div className='home-flex' style={{background:`rgb(${red},${blue},${green})`}}>
-                            {/* {localStorage.getItem('time') ? <Header/> : 'error'} */}
-                            {/* {localStorage.getItem('time') ? <Current/> : 'error'} */}
-                            {/* {localStorage.getItem('time') ? <Hourly/> : 'error'} */}
-                            <Graphs/>
+                        <div className='home-flex' style={{background:`linear-gradient(180deg,rgb(${red},${blue},${green}), rgb(255,255,255))`}}>
+                            {localStorage.getItem('time') ? <Header/> : 'error'}
+                            {localStorage.getItem('time') ? <Current/> : 'error'}
+                            {localStorage.getItem('time') ? <Hourly/> : 'error'}
+                            {/* <Graphs/> */}
                         </div>
                     </globalData.Provider>
                 </globalCount.Provider>
