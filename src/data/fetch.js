@@ -16,7 +16,6 @@ export function GetData() {
             localStorage.setItem('ow_api', JSON.stringify(main.data))
             setStat(true)
             setCount(count+ 1)
-            console.log(name.data)
         }))
     }
 
@@ -24,25 +23,25 @@ export function GetData() {
         console.log(localStorage.getItem('name'))
         if(lat && lon) {
             if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') ) {
-                if(parseInt(localStorage.getItem('time')) < parseInt(date.getTime()) - 60000) {
+                if(parseInt(localStorage.getItem('time')) < date.getTime() - 1800000) {
                    
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
                     getData()
                 }
             } else if(localStorage.getItem('time') && (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null)){
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
-                console.log('testing name')
+                // console.log('testing name')
                 getData()
             } else {
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
-                console.log('testing data')
+                // console.log('testing data')
                 getData()
             }
             
         }
     
     })
-    console.log(count)
+    // console.log(count)
     return (
         <></>
     )

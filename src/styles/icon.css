@@ -8,11 +8,11 @@
     stroke-dasharray: 2.3;
     stroke-dashoffset: 1;
     transform-origin: center;
-    animation: SunRotate 15s infinite linear;
+    animation: SunRotate 15s linear;
 }
 
 .svg-translate {
-    animation: TranslateX 15s infinite linear;
+    animation: TranslateX 5s linear;
 }
 
 @keyframes SunRotate {

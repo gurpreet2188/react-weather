@@ -36,7 +36,13 @@ export function Current() {
     const date = new Date()
     const current_time = Math.round(date.getTime() / 1000)
     const clouds = 48//data?.current?.clouds
-
+    // if(data.daily?.)
+    // console.log(data.hourly[0])
+    // for(let i =0; i < 48; i++) {
+    //     if(data.hourly[i]) {
+    //         console.log(new Date(data.hourly[i].dt * 1000).getHours())
+    //     }
+    // }
 
     useEffect(() => {
         if (clouds > 50 && (current_time > sunrise.getTime() && current_time < sunset.getTime())) {
@@ -56,11 +62,13 @@ export function Current() {
                 {(data?.current?.clouds > 50) ? <IconClouded w={size.w} h={size.h} /> :
                     (data?.current?.clouds > 25 && data?.current?.clouds < 50) ? <IconCloudedSun w={size.w} h={size.h} /> : "wut"}
             </div>
-            <h1 className='current-temp'>{parseInt(data.current?.temp)}&deg;C</h1>
+            <div className='current-temp'>
+                <h3 className='current-condition-extra-feel'>Feels Like: <span className='current-value'>{parseInt(data.current?.feels_like)}&deg;</span></h3>
+                <h1 className='current-temp-text'>{parseInt(data.current?.temp)}&deg;</h1>
+            </div>
             <h3 className='current-condition'>{data.current?.weather[0].description}</h3>
             <h3 className='current-condition-extra'>Humidity: <span className='current-value'>{data.current?.humidity}%</span></h3>
             <h3 className='current-condition-extra'> Wind: <span className='current-value'>{data.current?.wind_speed}m/s</span> <IconArrow w={18} h={18} deg={data.current?.wind_deg} /></h3>
-            <h3 className='current-condition-extra'>Feels Like: <span className='current-value'>{parseInt(data.current?.feels_like)}&deg;C</span></h3>
             <h3 className='current-condition-extra'>Pressure: <span className='current-value'>{data.current?.pressure}hPa</span></h3>
 
         </div>
