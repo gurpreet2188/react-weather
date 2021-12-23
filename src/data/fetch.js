@@ -22,15 +22,14 @@ export function GetData() {
         }))
     }
     useEffect(() => {
-        console.log(parseInt(localStorage.getItem('time')), date.getTime() - 1800000 )
         if(lat && lon) {
-            if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') ) {
+            if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') && localStorage.getItem('air')) {
                 if(parseInt(localStorage.getItem('time')) < date.getTime() - 1800000) {
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
                     console.log("test")
                     getData()
                 }
-            } else if(localStorage.getItem('time') === null || (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null)){
+            } else if(localStorage.getItem('time') === null || (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null || localStorage.getItem('air') === null)){
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
                 getData()
             } else {

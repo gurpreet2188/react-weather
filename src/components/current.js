@@ -70,12 +70,13 @@ export function Current() {
         }
 
         const airQ = () => {
-            const v = air.list[0].main.aqi
+            const v = air?.list[0].main.aqi
             if(v === 1) {setAirq("good")}
             else if ( v === 2) { setAirq("fair")}
             else if ( v === 3) { setAirq("moderate")}
             else if ( v === 4) { setAirq("poor")}
             else if ( v === 5) { setAirq("very poor")}
+            else {setAirq("Data Error")}
         }
         airQ()
     }, [])
