@@ -11,11 +11,11 @@
 
 .dash-anim {
     transform-origin: center;
-    animation: SunRotate 15s linear;
+    animation: SunRotate 15s linear infinite;
 }
 
 .svg-translate {
-    animation: TranslateX 5s linear;
+    animation: TranslateX 15s linear infinite;
 }
 
 @keyframes SunRotate {

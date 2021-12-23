@@ -274,6 +274,7 @@ html, body {
     font-family: 'Barlow', serif;
     letter-spacing: .1rem;
     font-weight: 200;
+    text-align: center;
 }
 
 .forecast-icons {

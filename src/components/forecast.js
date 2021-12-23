@@ -23,9 +23,9 @@ export function Forecast() {
                             return <div key={i} className="forecast-content">
                                 <p className="forecast-content-text">{parseInt(m.temp)}&deg;</p>
                                 <div className="forecast-icons">
-                                    {(m.clouds >= 75) ? <IconClouded w={size.w} h={size.h} /> :
-                                        (m.clouds >= 26 && m.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} /> :
-                                            (m.clouds <= 25 && m.clouds >= 0) ? <IconSun w={size.w} h={size.h} /> : ""}
+                                    {(m.clouds >= 75) ? <IconClouded w={size.w} h={size.h} anim={true} /> :
+                                        (m.clouds >= 26 && m.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} anim={true}/> :
+                                            (m.clouds <= 25 && m.clouds >= 0) ? <IconSun w={size.w} h={size.h} anim={true} /> : ""}
                                 </div>
                                 <p className="forecast-content-text">{new Date(m.dt * 1000).getHours()}</p>
                             </div>
@@ -38,9 +38,9 @@ export function Forecast() {
                             return <div key={i} className="forecast-content">
                                 <p className="forecast-content-text">{parseInt(m.temp.day)}&deg;</p>
                                 <div className="forecast-icons">
-                                    {(m.clouds >= 75) ? <IconClouded w={size.w} h={size.h} /> :
-                                        (m.clouds >= 26 && m.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} /> :
-                                            (m.clouds <= 25 && m.clouds >= 0) ? <IconSun w={size.w} h={size.h} /> : ""}
+                                {(m.clouds >= 75) ? <IconClouded w={size.w} h={size.h} anim={true} /> :
+                                        (m.clouds >= 26 && m.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} anim={true}/> :
+                                            (m.clouds <= 25 && m.clouds >= 0) ? <IconSun w={size.w} h={size.h} anim={true} /> : ""}
                                 </div>
                                 <p className="forecast-content-text">{new Date(m.dt * 1000).getDate()}</p>
                             </div>

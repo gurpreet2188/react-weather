@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IconClouded } from '../assets/icon-components/clouded';
 import { IconCloudedSun } from '../assets/icon-components/cloudedSun'
 import { IconArrow } from '../assets/icon-components/arrow'
@@ -30,8 +30,10 @@ export function Current() {
     // }
 
     const { setRed, setBlue, setGreen, setRed1, setBlue1, setGreen1, setFontColor } = useContext(globalData)
-    const [vis,setVis] = useState(false)
-    const data = JSON.parse((localStorage.getItem('ow_api')))
+    const [vis, setVis] = useState(false)
+    const data = JSON.parse(localStorage.getItem('ow_api'))
+    const air = JSON.parse(localStorage.getItem('air'))
+    const [airq, setAirq] = useState("")
     console.log(data)
     const sunrise = new Date(data.current?.sunrise * 1000)
     const nextSunrise = new Date(data.daily[1].sunrise * 1000)
@@ -39,6 +41,7 @@ export function Current() {
     const date = new Date()
     const current_time = Math.round(date.getTime())
     const clouds = data?.current?.clouds
+
 
     // if(data.daily?.)
     // console.log(data.hourly[0])
@@ -54,7 +57,7 @@ export function Current() {
             setGreen(255)
             setBlue(255)
             setVis(false)
-           
+
         } else if (current_time >= sunset.getTime() && current_time <= nextSunrise.getTime()) {
             setRed(100)
             setGreen(100)
@@ -65,6 +68,16 @@ export function Current() {
             setFontColor("#fff")
             setVis(true)
         }
+
+        const airQ = () => {
+            const v = air.list[0].main.aqi
+            if(v === 1) {setAirq("good")}
+            else if ( v === 2) { setAirq("fair")}
+            else if ( v === 3) { setAirq("moderate")}
+            else if ( v === 4) { setAirq("poor")}
+            else if ( v === 5) { setAirq("very poor")}
+        }
+        airQ()
     }, [])
 
     return (
@@ -88,8 +101,8 @@ export function Current() {
                         <h3 className='stats-content-subtitle'>Humidity</h3>
                     </div>
                     <div className='stats-content'>
-                        <h3 className='stats-content-title'>{!vis ? data.current?.uvi : data.current?.visibility / 1000 + "km"}</h3> 
-                        <h3 className='stats-content-subtitle'>{!vis ? "UVI": "visibility"}</h3>
+                        <h3 className='stats-content-title'>{!vis ? data.current?.uvi : data.current?.visibility / 1000 + "km"}</h3>
+                        <h3 className='stats-content-subtitle'>{!vis ? "UVI" : "visibility"}</h3>
                     </div>
                 </div>
                 <div className='stats-col2'>
@@ -98,8 +111,8 @@ export function Current() {
                         <h3 className='stats-content-subtitle'> Wind</h3>
                     </div>
                     <div className='stats-content'>
-                        <h3 className='stats-content-title'>{data.current?.pressure}hPa</h3>
-                        <h3 className='stats-content-subtitle'>Pressure</h3>
+                        <h3 className='stats-content-title' style={{textTransform:'uppercase'}}>{airq}</h3>
+                        <h3 className='stats-content-subtitle'>Air Quality</h3>
                     </div>
                 </div>
 

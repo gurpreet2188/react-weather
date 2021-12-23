@@ -11,10 +11,12 @@ export function GetData() {
     const getData = () => {
         axios.all([
             axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
-            axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
-        ]).then(axios.spread((name, main) => {
+            axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`),
+            axios.get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`)
+        ]).then(axios.spread((name, main, air) => {
             localStorage.setItem('name', JSON.stringify(name.data[0]))
             localStorage.setItem('ow_api', JSON.stringify(main.data))
+            localStorage.setItem('air', JSON.stringify(air.data))
             setStat(true)
             setCount(count+ 1)
         }))
