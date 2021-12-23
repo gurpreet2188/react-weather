@@ -173,7 +173,6 @@ html, body {
 }
 
 .weather-text-condition {
-    font-size: 1.3rem;
     letter-spacing: .1rem;
     font-weight: 300;
     line-height: 2em;
@@ -306,6 +305,7 @@ html, body {
     display: none;
 }
 
+
 .graph-flex {
     display: flex;
     flex-direction: column;
@@ -316,10 +316,21 @@ html, body {
 .graphs {
     display: flex;
     flex-direction: column;
-    align-self: center;
-    overflow-y: hidden;
+    align-items: center;
+    overflow: hidden;
+    padding: .5rem;
+    gap: 1rem;
+    /* height: fit-content;
+    width: fit-content; */
 }
 
+.graph-footer {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 1rem;
+
+}
 .graphs-text {
     font-family: 'Barlow', serif;
     font-weight: 200;

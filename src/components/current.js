@@ -29,7 +29,7 @@ export function Current() {
     //     }
     // }
 
-    const { setRed, setBlue, setGreen, setRed1, setBlue1, setGreen1, setFontColor } = useContext(globalData)
+    const {sun, setSun, setRed, setBlue, setGreen, setRed1, setBlue1, setGreen1, setFontColor } = useContext(globalData)
     const [vis, setVis] = useState(false)
     const data = JSON.parse(localStorage.getItem('ow_api'))
     const air = JSON.parse(localStorage.getItem('air'))
@@ -57,6 +57,7 @@ export function Current() {
             setGreen(255)
             setBlue(255)
             setVis(false)
+            setSun("sunrise")
 
         } else if (current_time >= sunset.getTime() && current_time <= nextSunrise.getTime()) {
             setRed(100)
@@ -67,6 +68,7 @@ export function Current() {
             setBlue1(0)
             setFontColor("#fff")
             setVis(true)
+            setSun("sunset")
         }
 
         const airQ = () => {
@@ -81,6 +83,8 @@ export function Current() {
         airQ()
     }, [])
 
+    const fontSize = data.current?.weather[0].description.length > 18 ? "1.1rem" : "1.4rem"
+
     return (
         <div className='content-flex'>
             <div className='weather'>
@@ -92,7 +96,7 @@ export function Current() {
                 <div className='weather-text'>
                     <h1 className='weather-text-title'>{parseInt(data.current?.temp)}&deg;</h1>
                     <h3 className='weather-text-subtitle'>Feels Like: <span className='current-value'>{parseInt(data.current?.feels_like)}&deg;</span></h3>
-                    <h3 className='weather-text-condition'>{data.current?.weather[0].description}</h3>
+                    <h3 className='weather-text-condition' style={{fontSize: fontSize}} >{data.current?.weather[0].description}</h3>
                 </div>
             </div>
             <div className='current-stats'>

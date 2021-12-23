@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { globalData } from "../../components/base"
 
-export function Graph({ type, points, axisX, axisY }) {
+export function Graph({ points, axisX, axisY }) {
+    const {sun} = useContext(globalData)
     return (
         <div className="graph-flex">
-            <svg viewBox={`0 -9 315 120`} width="calc(100vw - 4rem)" height="calc(100vh - 40rem)" >
+            <svg viewBox={`0 -9 315 120`} width="100%" height="100%" >
 
                 <g>
                     {axisY}
@@ -12,11 +14,11 @@ export function Graph({ type, points, axisX, axisY }) {
                 <g>
                     {axisX}
                 </g>
-                <line x1="45" x2="45" y1="0" y2="90" stroke="#000" strokeWidth="1px"></line>
-                <line x1="45" x2="300" y1="90" y2="90" stroke="#000" strokeWidth="1px"></line>
+                <line x1="45" x2="45" y1="0" y2="90" stroke={sun === "sunrise" ? "rgba(0,0,0,0.5)": "rgba(255,255,255,0.5)"} strokeWidth="1px"></line>
+                <line x1="45" x2="300" y1="90" y2="90" stroke={sun === "sunrise" ? "rgba(0,0,0,0.5)": "rgba(255,255,255,0.5)"} strokeWidth="1px"></line>
                 <linearGradient id="rGradient" gradientTransform="rotate(90)" spreadMethod="pad">
-                    <stop offset="0%" x1="150" x2="150" stop-color="rgba(0,0,0,0.5)" />
-                    <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                    <stop offset="0%" x1="150" x2="150" stopColor={sun === "sunrise" ? "rgba(0,0,0,0.5)": "rgba(255,255,255,0.5)"} />
+                    <stop offset="100%" stopColor="rgba(255,255,255,0)" />
                 </linearGradient>
 
                 <g className="show">
@@ -30,8 +32,6 @@ export function Graph({ type, points, axisX, axisY }) {
                 {console.log(points)}
 
             </svg>
-
-            <p className="graphs-text">{type}</p>
         </div>
 
     )

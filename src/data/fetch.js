@@ -4,8 +4,12 @@ import { globalStat, globalCount } from '../components/base';
 import { useLoction } from './location';
 export function GetData() {
     const {setStat} = useContext(globalStat)
-    const {count, setCount} = useContext(globalCount)
     const {lat, lon} = useLoction()
+    // const [lat,lon] = [1.4107 , 103.8796]
+    const t = localStorage.getItem('time')
+    const n = localStorage.getItem('name')
+    const o = localStorage.getItem('ow_api')
+    const a = localStorage.getItem('air')
     const date = new Date()
     console.log("running")
     const getData = () => {
@@ -18,18 +22,19 @@ export function GetData() {
             localStorage.setItem('ow_api', JSON.stringify(main.data))
             localStorage.setItem('air', JSON.stringify(air.data))
             setStat(true)
-            setCount(count+ 1)
         }))
     }
     useEffect(() => {
+        console.log(parseInt(t) < date.getTime() - 600000)
         if(lat && lon) {
-            if(localStorage.getItem('time') && localStorage.getItem('name') && localStorage.getItem('ow_api') && localStorage.getItem('air')) {
-                if(parseInt(localStorage.getItem('time')) < date.getTime() - 1800000) {
+            if(t && n && o && a) {
+                if(parseInt(t) < date.getTime() - 600000) {
                     localStorage.setItem('time', JSON.stringify(date.getTime()))
                     console.log("test")
                     getData()
                 }
-            } else if(localStorage.getItem('time') === null || (localStorage.getItem('name') === null || localStorage.getItem('ow_api') === null || localStorage.getItem('air') === null)){
+            } else if(t === null || n === null || o === null || a === null){
+                console.log('condition check')
                 localStorage.setItem('time', JSON.stringify(date.getTime()))
                 getData()
             } else {
