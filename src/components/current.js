@@ -85,9 +85,9 @@ export function Current() {
         <div className='content-flex'>
             <div className='weather'>
                 <div className='weather-image'>
-                    {data.current?.clouds >= 75 ? <IconClouded w={size.w} h={size.h} anim={true} /> :
-                        (data.current?.clouds >= 26 && data.current?.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} anim={true} /> :
-                            (data.current?.clouds <= 25 && data.current?.clouds >= 0) ? <IconSun w={size.w} h={size.h} anim={true} /> : ""}
+                    {data.current?.clouds >= 75 ? <IconClouded w={size.w} h={size.h} anim={false} /> :
+                        (data.current?.clouds >= 26 && data.current?.clouds <= 74) ? <IconCloudedSun w={size.w} h={size.h} anim={false} /> :
+                            (data.current?.clouds <= 25 && data.current?.clouds >= 0) ? <IconSun w={size.w} h={size.h} anim={false} /> : ""}
                 </div>
                 <div className='weather-text'>
                     <h1 className='weather-text-title'>{parseInt(data.current?.temp)}&deg;</h1>

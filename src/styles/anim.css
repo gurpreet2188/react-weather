@@ -6,3 +6,31 @@
     transform-origin: center;
     animation: Rotate 20s infinite;
 }
+
+@keyframes OpacityOn {
+    0%{opacity: 1;visibility: visible;}
+    100%{opacity: 0; visibility: collapse;}
+}
+
+@keyframes OpacityOff {
+    0%{opacity: 0; visibility: collapse;}
+    100%{opacity: 1; visibility: visible;}
+}
+
+@keyframes scaleY {
+    0%{transform: scaleY(40%);}
+    100%{transform: scaleY(100%);}
+}
+
+.hide {
+    visibility: collapse;
+    animation: OpacityOn 1s ease-in-out;
+    opacity: 0;
+}
+.show {
+    transform-origin: 0 100%;
+    animation: scaleY .5s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+}
+

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 
 export function Graph({ type, points, axisX, axisY }) {
     return (
-        <>
-            <svg viewBox={`0 -9 305 120`} width="300" height="100" >
+        <div className="graph-flex">
+            <svg viewBox={`0 -9 315 120`} width="calc(100vw - 4rem)" height="calc(100vh - 40rem)" >
 
                 <g>
                     {axisY}
@@ -19,7 +19,7 @@ export function Graph({ type, points, axisX, axisY }) {
                     <stop offset="100%" stop-color="rgba(255,255,255,0)" />
                 </linearGradient>
 
-                <g className="graph-dataline">
+                <g className="show">
                     <polygon
                         fill="url(#rGradient)"
                         stroke="url(#rGradient)"
@@ -31,8 +31,8 @@ export function Graph({ type, points, axisX, axisY }) {
 
             </svg>
 
-            <p>{type}</p>
-        </>
+            <p className="graphs-text">{type}</p>
+        </div>
 
     )
 }

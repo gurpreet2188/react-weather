@@ -21,7 +21,7 @@ export function Base() {
         <>
             <globalStat.Provider value={{stat, setStat}}>
                 <globalCount.Provider value={{ count, setCount }}>
-                    <globalData.Provider value={{ data, setData, red, blue, green, setRed, setBlue, setGreen, setRed1, setBlue1, setGreen1, setFontColor}}>
+                    <globalData.Provider value={{ data, setData, red, blue, green, setRed, setBlue, setGreen, setRed1, setBlue1, setGreen1, setFontColor, textColor}}>
 
                         <GetData />
                         <div className='home-flex' style={{background:`linear-gradient(180deg,rgb(${red},${blue},${green}), rgb(${red1},${blue1},${green1})`, color:textColor, stroke:textColor}}>
