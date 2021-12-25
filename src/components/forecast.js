@@ -25,7 +25,6 @@ export function Forecast({type}) {
                 }) : type === "d" ? data?.daily.map((m, i) => {
 
                     if (i >= 0 && i <= 6) {
-                        // console.log(new Date(c_t).getDate())
                         if (new Date().getDate() < new Date(m.dt * 1000).getDate()) {
                             return <div key={i} className={type === "d" ? "forecast-content" : ""}>
                                 <p className="forecast-content-text">{parseInt(m.temp.day)}&deg;</p>

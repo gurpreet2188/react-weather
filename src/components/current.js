@@ -34,7 +34,7 @@ export function Current() {
     const data = JSON.parse(localStorage.getItem('ow_api'))
     const air = JSON.parse(localStorage.getItem('air'))
     const [airq, setAirq] = useState("")
-    console.log(data)
+    // console.log(data)
     const sunrise = new Date(data.current?.sunrise * 1000)
     const nextSunrise = new Date(data.daily[1].sunrise * 1000)
     const sunset = new Date(data.current?.sunset * 1000)
@@ -99,7 +99,7 @@ export function Current() {
                     <h3 className='weather-text-condition' style={{fontSize: fontSize}} >{data.current?.weather[0].description}</h3>
                 </div>
             </div>
-            <div className='current-stats'>
+            {/* <div className='current-stats'>
                 <div className='stats-col1'>
                     <div className='stats-content'>
                         <h3 className='stats-content-title'>{data.current?.humidity}%</h3>
@@ -122,7 +122,7 @@ export function Current() {
                 </div>
 
 
-            </div>
+            </div> */}
 
 
 

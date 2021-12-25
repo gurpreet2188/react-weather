@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Graph } from '../assets/icon-components/graph';
 
-export function Graphs({ time, type }) {
+export function Graphs({ time, type, show }) {
     const styles = {
         fontSize: ".9rem",
         fontFamily: "'Barlow', serif",
@@ -20,7 +20,7 @@ export function Graphs({ time, type }) {
     const tempY = ["40", "20", "0"].map((m, i) => { return <text style={styles} key={i} x="0" y={yScale[i]}>{m}</text> })
     const dates = data.daily?.map((m, i) => { return <text style={styles} key={i} x={xScale[i] - 6} y="106">{new Date(m.dt * 1000).getDate()}</text> })
     const hours = data.hourly?.slice(0, 8).map((m, i) => { return <text style={styles} key={i} x={xScale[i] - 6} y="106">{new Date(m.dt * 1000).getHours()}</text> })
-    console.log(data.daily)
+    // console.log(data.daily)
     useEffect(() => {
         switch (type) {
             case "rain":
@@ -38,14 +38,14 @@ export function Graphs({ time, type }) {
             default:
                 break;
         }
-        console.log(points)
+        // console.log(points)
     }, [time, type])
 
 
 
     return (
         <div>
-            <Graph points={points} axisX={time === "d" ? dates : hours} axisY={type === "uvi" ? uviY : type === "temp" ? tempY : pctY} />
+            <Graph points={points} axisX={time === "d" ? dates : hours} axisY={type === "uvi" ? uviY : type === "temp" ? tempY : pctY} show={show} />
         </div>
     )
 }

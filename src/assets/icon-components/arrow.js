@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function IconArrow({ w, h, deg }) {
-   console.log(deg)
+//    console.log(deg)
     return (
         <svg  width={w} height={h} className='svg-common current-value'  style={{transformOrigin: 'center', transform: `rotate(${0}deg)`, justifySelf: 'center', alignSelf:'center'}} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 

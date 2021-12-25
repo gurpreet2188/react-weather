@@ -8,29 +8,95 @@
 }
 
 @keyframes OpacityOn {
-    0%{opacity: 1;visibility: visible;}
-    100%{opacity: 0; visibility: collapse;}
+    0%{opacity: 1;}
+    100%{opacity: 0; display: none;}
 }
 
 @keyframes OpacityOff {
-    0%{opacity: 0; visibility: collapse;}
-    100%{opacity: 1; visibility: visible;}
+    0%{opacity: 0; display: none;}
+    100%{opacity: 1;}
 }
 
-@keyframes scaleY {
-    0%{transform: scaleY(40%);}
-    100%{transform: scaleY(100%);}
+@keyframes scaleYOpen {
+    0%{transform: scaleY(40%); opacity: 0;}
+    100%{transform: scaleY(100%); opacity: 1;}
+}
+@keyframes scaleYClose {
+    0%{transform: scaleY(100%); opacity: 1;}
+    100%{transform: scaleY(0%); opacity: 0;}
 }
 
-.hide {
-    visibility: collapse;
-    animation: OpacityOn 1s ease-in-out;
+.hide-stats {
+    transform-origin: 100% 0%;
+    transform: scaleY(0%) translateY(-100%); 
+    opacity: 0;
+   
+}
+.hide-forecast {
     opacity: 0;
 }
-.show {
+.show-stats {
     transform-origin: 0 100%;
-    animation: scaleY .5s ease-in-out;
+    transform: scaleY(100%) translateY(0%);
     opacity: 1;
-    visibility: visible;
 }
+
+.show-forecast {
+    opacity: 1;
+}
+
+.forecast-up {
+    transform-origin: 100% 0%;
+    transform: translateY(-120%);
+}
+
+.forecast-down {
+    transform-origin: 0% 100%;
+    transform: translateY(0%);
+}
+
+.forecast-icon-closed{
+    flex-direction: column;
+    transform: scale(150%, 150%);
+    opacity: .5;
+}
+
+.forecast-icon-opened{
+    flex-direction: column;
+    transform: scale(100%, 100%);
+    opacity: .8;
+}
+
+.forecast-icon-large {
+    align-self: center;
+    transform: scale(200%, 200%) translate(0%, 0%) rotate(180deg);
+    transform-origin: center;
+    margin-bottom: 1rem;
+    opacity: .3;
+}
+
+.forecast-icon-small{
+    align-self: center;
+    transform: scale(100%, 100%) translate(400%, 110%) rotate(0deg) ;
+    transform-origin: center;
+    opacity: .8;
+}
+
+.graph-poly-show {
+    transform-origin: 0% 100%;
+    animation: scaleYOpen .3s linear;
+    opacity: 1;
+}
+
+.graph-poly-hide {
+    transform-origin: 0% 100%;
+    animation: scaleYClose .15s linear;
+    opacity: 0;
+}
+
+
+
+
+
+
 

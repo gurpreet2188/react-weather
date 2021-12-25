@@ -21,11 +21,15 @@ h3,h4 {
     font-family: 'Barlow', serif;
     letter-spacing: .2rem;
 }
-html, body {
-    padding: 0;
-    margin: 0;
-    overflow: auto;
+
+a, a:hover, a:focus, a:active, a:link {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
+
 
 .header {
     display: flex;
@@ -138,6 +142,7 @@ html, body {
     padding: 0;
     margin: 0;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 .weather-image {
     /* z-index: -999; */
@@ -181,18 +186,28 @@ html, body {
 .current-stats {
     display: flex;
     flex-direction: row;
-    gap: 4rem;
-    align-self: center;
-    margin-top: 1.5rem;
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    gap: 4.5rem;
+    margin-left: 1.1rem
 }
 
-.stats-col1, .stats-col2 {
+.stats-col {
     display: flex;
     flex-direction: column;
+    align-self: center;
 }
 
 .stats-content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
     margin-bottom: 1rem;
+    align-self: center;
+    justify-self: center;
+
 }
 
 .stats-content-title {
@@ -200,6 +215,7 @@ html, body {
     text-align: center;
     text-transform: none;
     letter-spacing: .1rem;
+  
 }
 
 .stats-content-subtitle {
@@ -209,18 +225,22 @@ html, body {
     letter-spacing: .1rem;
 }
 
-
-.forecast-main {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    /* margin-top: 3rem; */
-   
+.forecast-text, a:link {
+  
+    text-decoration: none;
+    align-self: center;
 }
 
-.forecast-header {
+.forecast-text {
     display: flex;
-    flex-direction: row;
+    border: none;
+    background: transparent;
+    /* flex-direction: column; */
+}
+
+.forecast-panel {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
@@ -228,54 +248,60 @@ html, body {
     display: flex;
     flex-direction: row;
     gap: .5rem;
-    margin: auto;
-    font-family: 'Barlow', serif;
-    font-size: .7rem;
-    letter-spacing: .1rem;
-    text-transform: uppercase;
-    text-decoration: none;
 }
 
-.forecast-style-select, a:link {
-    font-family: 'Barlow', serif;
-    font-size: .8rem;
-    letter-spacing: .1rem;
-    text-transform: uppercase;
-    text-decoration: none;
+
+.forecast-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: calc(100vh / 6);
 }
 
+.forecast-header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
 .forecast-bottom-selection {
     display: flex;
     flex-direction: row;
 }
-
-.forecast-style-selection {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-
-
 .forecast-selected {
     /* border-bottom: solid 1px; */
     opacity: 1;
+    background: none;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
 }
 
 .forecast-not-selected {
     opacity: .4;
+    background: none;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+.forecast-chart-icon {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .forecast {
     display: flex;
     flex-direction: row;
     gap: 1.5rem;
-    overflow-x: scroll;
     align-self: center;
-    padding-top: 1rem;
 }
 
 .forecast-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
     letter-spacing: .1rem;
 }
 
@@ -299,37 +325,28 @@ html, body {
     opacity: .5;
 }
 
-
-
 .forecast::-webkit-scrollbar {
     display: none;
 }
-
 
 .graph-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 1rem; */
 }
 
 .graphs {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
-    padding: .5rem;
-    gap: 1rem;
-    /* height: fit-content;
-    width: fit-content; */
+    gap: 1.5rem;
+    height: calc(100vh / 6);
 }
 
 .graph-footer {
     display: flex;
     flex-direction: row;
-    align-self: center;
     gap: 1rem;
-
 }
 .graphs-text {
     font-family: 'Barlow', serif;
