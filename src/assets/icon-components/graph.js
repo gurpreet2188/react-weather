@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from "react"
-import { globalData } from "../../components/base"
+import { useContext } from "react"
+import { GlobalTime } from "../../context/contexts"
 
 export function Graph({ points, axisX, axisY,show }) {
-    const {sun} = useContext(globalData)
+    const {sun} = useContext(GlobalTime)
     // console.log(show)
     return (
         <div className="graph-flex">

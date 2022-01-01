@@ -1,0 +1,12 @@
+@mixin respond-to($breakpoint) {
+    $value: map-get($breakpoints, $breakpoint );
+
+    @if $value != null {
+        @media (max-width: $value) {
+            @content;
+        }
+    }
+    @else {
+        @warn "breakpoint Error...."
+    }
+}

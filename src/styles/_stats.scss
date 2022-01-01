@@ -1,0 +1,57 @@
+.stats {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        @include respond-to(phoneSmaller) {
+            margin-top: 1rem;
+        }
+
+        &-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            @include respond-to(phoneSmallest) {
+                gap: 1rem;
+            }
+            @include respond-to(phoneSmaller) {
+                gap: 2rem;
+            }
+        }
+
+        &-text {
+            letter-spacing: .1rem;
+            text-align: center;
+
+            &-title {
+                font-size: $font-title;
+                margin-bottom: 1.5rem;
+                text-transform: lowercase;
+
+                @include respond-to(phoneSmallest) {
+                    font-size: 1.2rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+    
+            &-subtitle {
+                font-size: $font-subtitle;
+            }
+        } 
+        
+        &-arrow {
+
+            @include respond-to(phoneSmallest) {
+               width: 1.4rem;
+            }
+            
+        }
+
+        
+   
+}

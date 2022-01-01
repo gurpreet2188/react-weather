@@ -34,6 +34,7 @@
 }
 .hide-forecast {
     opacity: 0;
+    visibility: collapse;
 }
 .show-stats {
     transform-origin: 0 100%;
@@ -47,13 +48,32 @@
 
 .forecast-up {
     transform-origin: 100% 0%;
-    transform: translateY(-120%);
+    /* transform: translateY(calc(100vh / 150%)); */
+    top:calc(100vh / 2.62) ;
 }
 
 .forecast-down {
     transform-origin: 0% 100%;
-    transform: translateY(0%);
+    /* transform: translateY(0%); */
+    top:calc(100vh / 1.4) ;
 }
+
+@media screen and (max-width: 360px) {
+    .forecast-up {
+        transform-origin: 100% 0%;
+        /* transform: translateY(calc(100vh / 150%)); */
+        top:calc(100vh / 2.1) ;
+    }
+
+    .forecast-down {
+        transform-origin: 0% 100%;
+        /* transform: translateY(0%); */
+        top:calc(100vh / 1.2) ;
+    }
+    
+}
+
+
 
 .forecast-icon-closed{
     flex-direction: column;
@@ -69,9 +89,9 @@
 
 .forecast-icon-large {
     align-self: center;
-    transform: scale(200%, 200%) translate(0%, 0%) rotate(180deg);
+    transform: scale(150%, 150%) translate(0%, 0%) rotate(180deg);
     transform-origin: center;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     opacity: .3;
 }
 

@@ -1,0 +1,103 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+
+    &-hide-stats {
+        transform-origin: 100% 0%;
+        opacity: 0;
+        transform: scaleY(0%);
+        will-change: auto;
+    }
+
+    &-show-stats {
+        transform-origin: 0% 0%;
+        transform: scaleY(100%);
+        opacity: 1;
+        will-change: auto;
+    }
+
+    &-panel {
+
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-self: center;
+        transition: all .5s ease-in-out;
+        overflow: hidden;
+
+        &-name-up {
+            font-size: 1.5rem;
+            background-color: transparent;
+            transform: scale(60%, 60%);
+            letter-spacing: 0.3rem;
+            opacity: .9;
+            will-change: auto;
+            
+        }
+
+        &-name-down {
+            font-size: 1.5rem;
+            background-color: transparent;
+            letter-spacing: 0.3rem;
+            opacity: .7;
+            will-change: auto;
+        }
+
+        &-up {
+            transform-origin: 100% 0%;
+            top:45% ;
+            will-change: auto;
+
+            @include respond-to(phoneSmallest) {
+                top:48% ;
+            }
+        }
+
+        &-down {
+            transform-origin: 0% 100%;
+            top:88% ;
+            will-change: auto;
+
+        }
+
+        &-icon-down {
+            align-self: center;
+            transform: scale(250%, 100%) translate(0%, 0%) rotate(180deg);
+            transform-origin: center;
+            margin-bottom: .5rem;
+            opacity: .3;
+            will-change: auto;
+        }
+        
+        &-icon-up {
+            align-self: center;
+            transform: scale(200%, 100%) translate(0%, 250%) rotate(0deg) ;
+            transform-origin: center;
+            opacity: .8;
+            will-change: auto;
+        }
+
+        &-show {
+            // transition-delay: 1s;
+            opacity: 1;
+            will-change: auto;
+           transform: translateZ(0);
+        }
+
+        &-hide {
+            opacity: 0;
+            // display:none;
+            will-change: auto;
+            height: 0rem;
+            transform: translateZ(0);
+        }
+
+    }
+
+    
+}

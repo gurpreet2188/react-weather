@@ -1,19 +1,10 @@
 
 import React from 'react';
-import { Base } from './components/base';
 import './styles/font.css'
 import './styles/anim.css'
 import './styles/common.css'
 import './styles/icon.css'
+import './styles/style.scss'
+import { SetData } from './context/setData';
 
-const App = () => {
-    return (
-        <>
-            {/* Test */}
-        <Base/>
-        </>
-    )
-}
-    
-
-export default App
+export default function App() {return <SetData/>}

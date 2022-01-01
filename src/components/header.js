@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalData } from '../context/contexts';
 export function Header() {
-    const data = JSON.parse(localStorage.getItem('ow_api'))
-    const name = JSON.parse(localStorage.getItem('name'))
-    console.log((data.timezone).split('/')[1])
+   const {name} = useContext(GlobalData)
     return (
        <div className='header'>
            <div>
