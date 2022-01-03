@@ -11,12 +11,13 @@ export function Graphs({ type, setPoly, poly }) {
         fontWeight: "100",
         letterSpacing: ".1rem",
         textAlign: 'right',
-        opacity: '1'
+        transition: 'all .5s ease-in-out'
     }
     const { data } = useContext(GlobalData)
     const [points, setPoints] = useState("")
     const [dots, setDots] = useState("")
-    const xScale = [46, 85, 120, 155, 190, 225, 260, 300]
+    const [text, setText] = useState("")
+    const xScale = [46, 82.28, 118.56, 154.84, 191.12, 227.4, 263.68, 299.96]
     const yScale = [1, 50, 100]
     // const tempt = [12, 2, 4, 12, 10, 0, 7, 0]
     const pctY = ["100%", "50%", "0%"].map((m, i) => { return <text style={styles} key={i} x="0" y={yScale[i]}>{m}</text> })
@@ -41,11 +42,17 @@ export function Graphs({ type, setPoly, poly }) {
     const graphUVI = () => switchGraph("uvi")
     const graphTemp = () => switchGraph("temp")
 
-    const onHover = (v) => {
-        console.log(v)
-        return <div style={{ backgroundColor: '#fff', height: '15rem', width: '15rem', position: 'absolute' }}>
-            <p>{v}</p>
-        </div>
+    const [rSize, setRSize] = useState(4)
+    const [infoStyle, setInfoStyle] = useState(false)
+
+    const onHover = () => {
+
+        setRSize(15)
+        setInfoStyle(true)
+        setTimeout(() => {
+            setRSize(4)
+            setInfoStyle(false)
+        }, 10000)
     }
 
     useEffect(() => {
@@ -60,26 +67,28 @@ export function Graphs({ type, setPoly, poly }) {
                 break
             case "uvi":
                 setPoints((xScale.map((v, i) => { return `${v},${type === "d" ? 100 - (data.daily[i].uvi * 8.333) : 100 - (data.hourly[i].uvi * 8.333)}` })).join(" "))
-                setDots((xScale.map((v, i) => { return <circle key={i} onClick={() => { onHover(data.daily[i].uvi) }} id="sun" cx={v} cy={type === "d" ? 100 - (data.daily[i].uvi * 8.333) : 100 - (data.hourly[i].uvi * 8.333)} r="4"/> })))
+                setDots((xScale.map((v, i) => { return <circle key={i} onClick={() => { onHover() }} id="sun" cx={v} cy={type === "d" ? 100 - (data.daily[i].uvi * 8.333) : 100 - (data.hourly[i].uvi * 8.333)} r="4" /> })))
+                // setText((xScale.map((v, i) => { return <text onClick={() => { onHover() }} className={infoStyle ? "forecast-data-chart-show-info" : "forecast-data-chart-hide-info"} style={styles} key={i} x={v - 8} y={type === "d" ? 100 - (data.daily[i].uvi * 8.333) : 100 - (data.hourly[i].uvi * 8.333)}> {type === "d" ? data.daily[i].temp:data.hourly[i].temp}</text> })))
                 break
             case "temp":
                 setPoints((xScale.map((v, i) => { return `${v},${type === "d" ? (60 - data.daily[i].temp.day) : (60 - data.hourly[i].temp)}` })).join(" "))
-                setDots((xScale.map((v, i) => { return <circle key={i} id="sun" cx={v} cy={type === "d" ? (60 - data.daily[i].temp.day) : (60 - data.hourly[i].temp)} r="4" /> })))
+                setDots((xScale.map((v, i) => { return <circle key={i} onClick={() => { onHover() }} id="sun" cx={v} cy={type === "d" ? (60 - data.daily[i].temp.day) : (60 - data.hourly[i].temp)} r={rSize} /> })))
+                // setText((xScale.map((v, i) => { return <text onClick={() => { onHover() }} className={infoStyle ? "forecast-data-chart-show-info" : "forecast-data-chart-hide-info"} style={styles} key={i} x={v - 8} y={type === "d" ? (63.4 - data.daily[i].temp.day) : (63.4 - data.hourly[i].temp)}> {type === "d" ? parseInt(data.daily[i].temp.day) : parseInt(data.hourly[i].temp)}</text> })))
                 break
             default:
                 break;
         }
         // console.log(points)
-    }, [graph, type])
+    }, [graph, type, rSize, infoStyle])
 
     return (
         <div className='forecast-data-chart'>
-            <Graph points={points} axisX={type === "d" ? dates : hours} axisY={graph === "uvi" ? uviY : graph === "temp" ? tempY : pctY} show={poly} dots={dots} />
+            <Graph points={points} axisX={type === "d" ? dates : hours} axisY={graph === "uvi" ? uviY : graph === "temp" ? tempY : pctY} show={poly} dots={dots} info={text} />
             <div className='forecast-data-chart-footer'>
-                <button className="forecast-data-chart-footer-btn" style={{opacity: graph=== "temp" ? "1": "0.5"}} onClick={graphTemp}>Temp</button>
-                <button className="forecast-data-chart-footer-btn" style={{opacity: graph=== "prec" ? "1": "0.5"}} onClick={graphPrec}>Preci. </button>
-                <button className="forecast-data-chart-footer-btn" style={{opacity: graph=== "humidity" ? "1": "0.5"}} onClick={graphHumidity}>Humidity </button>
-                <button className="forecast-data-chart-footer-btn" style={{opacity: graph=== "uvi" ? "1": "0.5"}} onClick={graphUVI}>UVI </button>
+                <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "temp" ? "1" : "0.5" }} onClick={graphTemp}>Temp</button>
+                <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "prec" ? "1" : "0.5" }} onClick={graphPrec}>Preci. </button>
+                <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "humidity" ? "1" : "0.5" }} onClick={graphHumidity}>Humidity </button>
+                <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "uvi" ? "1" : "0.5" }} onClick={graphUVI}>UVI </button>
 
             </div>
 

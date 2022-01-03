@@ -92,6 +92,15 @@
                 transform: scaleY(100%);
                 
             }
+
+            &-show-info {
+                opacity: 1;
+
+            }
+
+            &-hide-info {
+                opacity: 0;
+            }
         }
        
 

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { GlobalColors, GlobalTime } from "../../context/contexts"
 
-export function Graph({ points, axisX, axisY, show, dots }) {
+export function Graph({ points, axisX, axisY, show, dots, info }) {
     const { sun } = useContext(GlobalTime)
     const [v, setV] = useState(100)
 
@@ -39,8 +39,9 @@ export function Graph({ points, axisX, axisY, show, dots }) {
                     />
                 </g>
                 {/* {console.log(points)} */}
-                <g  fill={`hsl(${hsl.h}, ${hsl.s}%,${hsl.l}%)`} stroke={`hsl(${hsl.h}, ${hsl.s}%,${v}%)`}>
+                <g  fill={`hsl(${hsl.h}, ${hsl.s}%,${hsl.l}%)`} stroke={`hsl(${hsl.h}, ${hsl.s}%,${v}%)`} style={{transition: 'all .5s ease-in-out'}}>
                     {dots}
+                    {info}
                 </g>
               
 
