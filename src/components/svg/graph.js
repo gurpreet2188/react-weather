@@ -10,7 +10,7 @@ export function Graph({ points, axisX, axisY, show, dots, info }) {
     // console.log(show)
     return (
         <div className="graph-flex">
-            <svg viewBox={`0 -9 315 130`} width="100%" height="100%" >
+            <svg viewBox={`0 -20 315 140`} width="100%" height="100%" >
 
                 <g>
                     {axisY}

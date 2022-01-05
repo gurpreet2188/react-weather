@@ -57,6 +57,10 @@
                 font-size: 1rem;
         
             }
+            &-extra {
+                font-size: .5rem;
+                text-align: center;
+            }
         }
 
         &-chart {
@@ -95,7 +99,9 @@
 
             &-show-info {
                 opacity: 1;
-
+                font-size:.8rem;
+                font-family: "'Barlow', serif";
+                text-anchor: middle;
             }
 
             &-hide-info {

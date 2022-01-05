@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+}
+
+h1,h2,h3,h4 {
+    font-family: 'Bellefair', serif;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h3,h4 {
+    font-family: 'Barlow', serif;
+}
+
+a, a:hover, a:focus, a:active, a:link {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.div-bg {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}

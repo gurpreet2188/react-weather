@@ -16,6 +16,7 @@ export function Forecast() {
         setPoly(true)
         !graphs ? setGraphs(true) : setGraphs(false)
     }
+    const days =['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
     
     return (
         <div className="forecast">
@@ -40,7 +41,7 @@ export function Forecast() {
                                     (new Date(m.dt * 1000).getTime() < new Date(data.current.sunrise * 1000).getTime() || new Date(m.dt * 1000).getTime() > new Date(data.current.sunset * 1000).getTime()) ? "sunset" : "sunrise"} anim={true} />}
             
                             </div>
-                            <p  className="forecast-data-content-period" style={{width:'.5rem'}}>{m?.rain ? m.rain[Object.keys(m.rain)]: 0}</p>
+                            {/* <p  className="forecast-data-content-extra">{m?.rain ? m.rain[Object.keys(m.rain)]: 0}</p> */}
                             <p className="forecast-data-content-period">{new Date(m.dt * 1000).getHours()}</p>
                         </div>
                         
@@ -53,8 +54,8 @@ export function Forecast() {
                             <div className="forecast-data-content-icons">
                                 {<IconAll key={i} size={size.w} clouds={m.clouds} rain={m.rain ? true : false} id={m.weather[0].id} sun="sunrise" anim={true} />}
                             </div>
-                            <p  className="forecast-data-content-period" style={{width:'.5rem'}}>{m?.rain ? m.rain: 0}</p>
-                            <p className="forecast-data-content-period">{new Date(m.dt * 1000).getDate()}</p>
+                            {/* <p  className="forecast-data-content-extra">{m?.rain ? m.rain: 0}</p> */}
+                            <p className="forecast-data-content-period">{days[new Date(m.dt * 1000).getDay()]}</p>
                         </div>
                     }
                 }) : ""}
@@ -62,7 +63,7 @@ export function Forecast() {
             </div>
 
             <div style={{ display: graphs ? "" : "none" }} >
-                <Graphs type={type} setPoly={setPoly} poly={poly} />
+                <Graphs type={type} setPoly={setPoly} poly={poly} days={days} />
             </div>
         </div>
     )
