@@ -13,15 +13,17 @@ function IconAll({ size, rain, clouds, id, sun, anim}) {
             if ((id >= 300 && id <= 321) || (id >= 500 && id <= 504)) {
                 setCloudsOpacity(0)
                 setSunMoonOpacity(.5)
+                setCloudsPCT(1)
             } else {
                 setCloudsOpacity(clouds.pct / 100)
                 setSunMoonOpacity(0)
+                setCloudsPCT(1)
             }
-            setCloudsPCT(1)
+            
         } else if (clouds.pct <= 10) {
             setCloudsPCT(0)
         } else {
-            setCloudsPCT(clouds.pct / 100)
+            setCloudsPCT(clouds <=40 ? 0.6 : clouds / 100)
         }
     }, [clouds, sun, rain, id, thunder])
 
@@ -48,7 +50,7 @@ function IconAll({ size, rain, clouds, id, sun, anim}) {
             stroke: textColor,
         }
     }
-
+    // console.log(cloudsPCT)
     const rainStyle = {
         opacity: (rain || thunder) ? "1" : "0",
         fill: thunder ? "#aaa" : '#fff',

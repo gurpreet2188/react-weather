@@ -11,23 +11,35 @@ export function Graphs({ type, setPoly, poly, days }) {
         fontWeight: "100",
         letterSpacing: ".1rem",
         textAlign: 'right',
-        transition: 'all .5s ease-in-out'
+        transition: 'all .5s ease-in-out',
+        textAnchor: 'left'
     }
 
-    const [maxTemp, setMaxTemp] = useState(35)
+
     const { data } = useContext(GlobalData)
     const [dType, setDType] = useState(data.hourly)
     const [points, setPoints] = useState("")
     const [dots, setDots] = useState("")
     const [text, setText] = useState("")
     const xScale = [46, 82.28, 118.56, 154.84, 191.12, 227.4, 263.68, 299.96]
-    const yScale = [1, 50, 100]
+    const yScale = [-5, 55, 105]
     // const tempt = [12, 2, 4, 12, 10, 0, 7, 100]
     const pctY = ["100%", "50%", "0%"].map((m, i) => { return <text style={styles} key={i} x="0" y={yScale[i]}>{m}</text> })
     const tempMax = Math.max(...dType.map(m => { return 10 + (m.temp.day ? m.temp.day : m.temp) })).toFixed(0)
     const tempRange = [tempMax, (tempMax / 2).toFixed(0), 0]
+    const rainArr = dType.map(m => {
+        if (dType === data.daily) {
+            return m.rain ? m.rain : 0
+        } else {
+            return m.rain ? m.rain["1h"] ? m.rain["1h"] : 0 : 0
+        }
+    })
+
+    const rainMax = (Math.max(...rainArr) + 2).toFixed(2)
+    const rainRange = [rainMax, (rainMax / 2).toFixed(2), 0]
     const uviY = ["12", "5", "0"].map((m, i) => { return <text style={styles} key={i} x="0" y={yScale[i]}>{m}</text> })
     const tempY = tempRange.map((m, i) => { return <text style={styles} key={i} x="0" y={yScale[i]}>{m}</text> })
+    const rainY = rainRange.map((m, i) => { return <text style={styles} key={i}  x="0" y={yScale[i]}>{i === 2 ? m + "mm": m}</text> })
     const dates = data.daily?.map((m, i) => { return <text style={styles} key={i} x={xScale[i] - 6} y="120">{new Date(m.dt * 1000).getDay()}</text> })
     const hours = data.hourly?.slice(0, 8).map((m, i) => { return <text style={styles} key={i} x={xScale[i] - 6} y="120">{new Date(m.dt * 1000).getHours()}</text> })
 
@@ -43,6 +55,7 @@ export function Graphs({ type, setPoly, poly, days }) {
             , 300)
     }
     const graphPrec = () => switchGraph("prec")
+    const graphRain = () => switchGraph("rain")
     const graphHumidity = () => switchGraph("humidity")
     const graphUVI = () => switchGraph("uvi")
     const graphTemp = () => switchGraph("temp")
@@ -87,6 +100,23 @@ export function Graphs({ type, setPoly, poly, days }) {
                         key={i} x={v}
                         y={100 - (100 * dType[i].pop)}>
                         {(100 * dType[i].pop).toFixed(0)}</text>
+                })))
+
+                break;
+
+            case "rain":
+                setPoints((xScale.map((v, i) => {
+                    return `${v},${100 - ((rainArr[i]) * (100 / rainMax))}`
+                })).join(" "))
+                setDots((xScale.map((v, i) => { return <circle key={i} style={{ transition: 'all .5s ease-in-out' }} id="sun" cx={v} cy={100 - ((rainArr[i]) * (100 / rainMax))} r={rSize} /> })))
+                setText((xScale.map((v, i) => {
+                    return <text onClick={() => { onHover() }}
+                        dominantBaseline='middle'
+                        style={{ transition: 'all .5s ease-in-out', fill: textColor }}
+                        className={infoStyle ? "forecast-data-chart-show-info" : "forecast-data-chart-hide-info"}
+                        key={i} x={v}
+                        y={100 - ((rainArr[i]) * (100 / rainMax))}>
+                        {rainArr[i]}</text>
                 })))
 
                 break;
@@ -141,14 +171,15 @@ export function Graphs({ type, setPoly, poly, days }) {
             default:
                 break;
         }
+
     }, [graph, dType, rSize, infoStyle, calc])
     //
     return (
         <div className='forecast-data-chart'>
-            <Graph points={points} axisX={type === "d" ? dates : hours} axisY={graph === "uvi" ? uviY : graph === "temp" ? tempY : pctY} show={poly} dots={dots} info={text} />
+            <Graph points={points} axisX={type === "d" ? dates : hours} axisY={graph === "uvi" ? uviY : graph === "temp" ? tempY : graph === "rain" ? rainY : pctY} show={poly} dots={dots} info={text} />
             <div className='forecast-data-chart-footer'>
                 <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "temp" ? "1" : "0.5" }} onClick={graphTemp}>Temp</button>
-                {/* <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "rain" ? "1" : "0.5" }} onClick={graphPrec}>Rain</button> */}
+                <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "rain" ? "1" : "0.5" }} onClick={graphRain}>Rain</button>
                 <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "prec" ? "1" : "0.5" }} onClick={graphPrec}>Preci.</button>
                 <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "humidity" ? "1" : "0.5" }} onClick={graphHumidity}>Humidity</button>
                 <button className="forecast-data-chart-footer-btn" style={{ opacity: graph === "uvi" ? "1" : "0.5" }} onClick={graphUVI}>UVI</button>

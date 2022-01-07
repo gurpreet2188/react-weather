@@ -8,11 +8,23 @@ export function SetData() {
     const date = new Date()
     const [stat, setStat] = useState(0)
     const { lat, lon } = useLoction()
+    const [update, setUpdate] = useState(false)
     // const [lat, lon] = [1.4107, 103.8796]
     const t = localStorage.getItem('time')
     const n = localStorage.getItem('name')
     const o = localStorage.getItem('main')
     const a = localStorage.getItem('air')
+
+    useEffect(()=>{
+        if( t && n && o && a ) {
+            if (parseInt(t) < date.getTime() - 600000) {
+                setUpdate(true)
+            } else {
+                setUpdate(false)
+            }
+        }
+    },[t, n, o, a])
+    
 
     useEffect(() => {
         if (lat && lon) {
@@ -21,11 +33,11 @@ export function SetData() {
                     GetData(lat, lon, date, setStat)
                 }
             } else if (t === null || n === null || o === null || a === null) {
-                console.log('else')
+                console.log('downloading weather info.....')
                 GetData(lat, lon, date, setStat, stat)
             }
         }
-    }, [lat, lon, t, n, o, a, stat])
+    }, [lat, lon, t, n, o, a, stat, update])
 
     return (
         <>
