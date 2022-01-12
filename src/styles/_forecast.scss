@@ -86,14 +86,14 @@
             }
 
             &-hide {
-                transform-origin: 80% 100%;
-                transform: scaleY(0%);
+                transform-origin: 100% 100%;
+                transform: scaleY(90%);
                 opacity: 0;
 
             }
 
             &-show {
-                transform-origin: 100% 80%;
+                transform-origin: 100% 100%;
                 transform: scaleY(100%);
                 
             }
@@ -107,6 +107,8 @@
 
             &-hide-info {
                 opacity: 0;
+                // display: none;
+                z-index: -10;
             }
         }
        

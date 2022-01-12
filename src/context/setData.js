@@ -9,7 +9,10 @@ export function SetData() {
     const [stat, setStat] = useState(0)
     const { lat, lon } = useLoction()
     const [update, setUpdate] = useState(false)
-    // const [lat, lon] = [1.4107, 103.8796]
+    // 49.8537377 -97.2923063
+     //const [lat, lon] = [1.4107, 103.8796] // sg
+     //const [lat, lon] = [49.8537377,-97.2923063] // canada
+    // const [lat ,lon] = [18.9754008,72.8415103] //mumbai
     const t = localStorage.getItem('time')
     const n = localStorage.getItem('name')
     const o = localStorage.getItem('main')

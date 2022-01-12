@@ -4,7 +4,6 @@ import { IconArrowUpDown } from './svg/iconArrow'
 import { Current } from './current';
 import { CurrentStats } from './current-stats';
 import { Forecast } from './forecast';
-import { Graphs } from './graphs'
 import { GlobalColors } from '../context/contexts';
 export function Home() {
 

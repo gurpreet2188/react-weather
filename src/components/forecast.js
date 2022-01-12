@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { GlobalColors, GlobalData } from "../context/contexts"
 import IconAll from "./svg/iconWeather"
-import { Graphs } from "./graphs"
+import { Graphs } from "./graphs/main"
 import { IconChart } from './svg/iconChart'
 
 export function Forecast() {
@@ -16,8 +16,8 @@ export function Forecast() {
         setPoly(true)
         !graphs ? setGraphs(true) : setGraphs(false)
     }
-    const days =['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-    
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
     return (
         <div className="forecast">
             <div className="forecast-header">
@@ -39,12 +39,12 @@ export function Forecast() {
 
                                 {<IconAll key={i} size={size.w} clouds={m.clouds} rain={m.rain ? true : false} id={m.weather[0].id} sun={
                                     (new Date(m.dt * 1000).getTime() < new Date(data.current.sunrise * 1000).getTime() || new Date(m.dt * 1000).getTime() > new Date(data.current.sunset * 1000).getTime()) ? "sunset" : "sunrise"} anim={true} />}
-            
+
                             </div>
                             {/* <p  className="forecast-data-content-extra">{m?.rain ? m.rain[Object.keys(m.rain)]: 0}</p> */}
                             <p className="forecast-data-content-period">{new Date(m.dt * 1000).getHours()}</p>
                         </div>
-                        
+
                     }
                 }) : type === "d" ? data?.daily.map((m, i) => {
 
@@ -63,8 +63,9 @@ export function Forecast() {
             </div>
 
             <div style={{ display: graphs ? "" : "none" }} >
-                <Graphs type={type} setPoly={setPoly} poly={poly} days={days} />
+                <Graphs type={type} setPoly={setPoly} poly={poly} />
             </div>
         </div>
     )
+    //setPoly={setPoly} poly={poly} days={days} 
 }
