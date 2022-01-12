@@ -57,7 +57,6 @@ export function Graphs({ type, poly, setPoly }) {
 
     const [xLegend, yLegend, points, dots, value] = useBase(arr, yArr, yLeg, data, type, rSize)
 
-    console.log(arr)
     return (
         <div className='forecast-data-chart'>
             {stat ? <Graph points={points} axisX={xLegend} axisY={yLegend} show={poly} dots={dots} info={value} click={toggleGraphValue} /> : null}

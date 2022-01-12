@@ -44,7 +44,6 @@ export function useGraphData(data, graph) {
 
         )
 
-
     }, [data, graph])
 
     useEffect(() => {
@@ -87,7 +86,7 @@ export function useGraphData(data, graph) {
                             })
                         )
                     } else if (max <= -1) {
-                        setYLegend([max, parseInt(total / 2), parseInt(min)])
+                        setYLegend([parseInt(max), parseInt(total / 2), parseInt(min)])
                         setYArr(
                             arr.map(m => {
                                 return ((Math.abs(m) - Math.abs(max))) * (100 / Math.abs(range))
@@ -105,24 +104,21 @@ export function useGraphData(data, graph) {
                     break
                 case 'rain':
                 case 'snow':
-                    setYLegend([max, (max / 2).toFixed(2), 0 + "mm"])
+                    setYLegend([max.toFixed(2), (max / 2).toFixed(2), 0 + "mm"])
                     setYArr(arr.map(m => {
-                        console.log(m)
                         return 100 - (m * (100 / max))
                     }))
                     break
                 case 'humidity':
                 case 'preci':
-                    setYLegend([parseInt(max), parseInt(max / 2), 0 + "%"])
+                    setYLegend([parseInt(max).toFixed(2), parseInt(max / 2).toFixed(2), 0 + "%"])
                     setYArr(arr.map(m => {
-                        console.log(m)
                         return 100 - m
                     }))
                     break
                 case 'uvi':
-                    setYLegend([max, (max / 2), 0])
+                    setYLegend([max.toFixed(2), (max / 2).toFixed(2), 0])
                     setYArr(arr.map(m => {
-                        console.log(m)
                         return 100 - (m * (100 / max))
                     }))
                     break
