@@ -110,7 +110,7 @@ export function useGraphData(data, graph) {
                     break
                 case 'humidity':
                 case 'preci':
-                    setYLegend([parseInt(max).toFixed(2), parseInt(max / 2).toFixed(2), 0 + "%"])
+                    setYLegend([parseInt(max), parseInt(max / 2), 0 + "%"])
                     setYArr(arr.map(m => {
                         return 100 - m
                     }))
