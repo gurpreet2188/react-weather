@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-import { IconClouded } from '../assets/icon-components/clouded';
-import { IconCloudedSun } from '../assets/icon-components/cloudedSun'
-import { IconSun } from '../assets/icon-components/sun';
 import { GlobalData, GlobalTime } from '../context/contexts';
 import IconAll from './svg/iconWeather';
 
@@ -9,9 +6,6 @@ export function Current() {
     const size = { w: "52%", h: "45%" }
     const {data} = useContext(GlobalData)
     const {sun} = useContext(GlobalTime)
-    // console.log(data)
-    const date = new Date()
-
     const fontSize = data.current?.weather[0].description.length > 18 ? "1.1rem" : "1.4rem"
     const clouds = data.current?.clouds
     const id = data.current?.weather[0].id

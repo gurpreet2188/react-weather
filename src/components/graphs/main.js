@@ -34,7 +34,7 @@ export function Graphs({ type, poly, setPoly }) {
 
     useEffect(() => {
         type === 'h' ? setDataType(data.hourly) : setDataType(data.daily)
-    }, [type])
+    }, [type, data])
 
     useEffect(() => {
         const check = (num) => {

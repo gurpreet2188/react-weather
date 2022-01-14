@@ -6,11 +6,11 @@ import { Home } from './home';
 
 export function Base() {
     const { textColor, hsl } = useContext(GlobalColors)
-    const { sun } = useContext(GlobalTime)
+    const { day } = useContext(GlobalTime)
     const [v, setV] = useState(100)
 
-    useEffect(() => { sun === 'sunrise' ? setV(100) : setV(60) }, [sun])
-    
+    useEffect(() => { day ? setV(100) : setV(60) }, [day])
+
     return (
         <>
             <div className='home' style={{

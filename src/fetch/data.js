@@ -1,5 +1,6 @@
 import axios from 'axios';
-export default function GetData(lat, lon, date, setStat) {
+export default function GetData(lat, lon, setStat) {
+    const date = new Date()
     return axios.all([
         axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
         axios.get(`${process.env.REACT_APP_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_KEY}`),

@@ -18,7 +18,7 @@ export function CurrentStats() {
             else {setAirq("Data Error")}
         }
         airQ()
-    },[airq])
+    },[aqi])
     
     return (
         <div className='stats'>

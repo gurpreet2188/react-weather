@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { IconChart } from '../assets/icon-components/chart';
 import { IconArrowUpDown } from './svg/iconArrow'
 import { Current } from './current';
 import { CurrentStats } from './current-stats';

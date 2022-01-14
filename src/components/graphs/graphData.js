@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 
 export function useGraphData(data, graph) {
-    const [rawArr, setRawArr] = useState() // use raw Array to calculate the graph
-    const [arr, setArr] = useState() // use this array to send it forwared to base.js with decimal removed
+    const [arr, setArr] = useState()
     const [min, setMin] = useState()
     const [max, setMax] = useState()
     const [yLeg, setYLegend] = useState()
@@ -26,7 +25,7 @@ export function useGraphData(data, graph) {
                 case 'uvi':
                     return m.uvi
                 default:
-                    break
+                    return m.temp
 
             }
         }))
