@@ -29,7 +29,7 @@ export function Forecast() {
                 <p className="forecast-data-content-temp">{parseInt(m.temp.day ? m.temp.day : m.temp)}&deg;</p>
                 <div className="forecast-data-content-icons">
 
-                    {<IconAll key={i} size={size.w} clouds={m.clouds} rain={m.rain ? true : false} id={m.weather[0].id} sun={sunType} anim={true} />}
+                    {<IconAll key={i} size={size.w} clouds={m.clouds} rain={m.rain ? true : false} id={m.weather[0].id} day={sunType} anim={true} />}
 
                 </div>
                 {/* <p  className="forecast-data-content-extra">{m?.rain ? m.rain[Object.keys(m.rain)]: 0}</p> */}
@@ -42,9 +42,9 @@ export function Forecast() {
 
     const setHourlyIcon = (m) => {
         if (new Date(m.dt * 1000).getTime() < new Date(data.current.sunrise * 1000).getTime() || new Date(m.dt * 1000).getTime() > new Date(data.current.sunset * 1000).getTime()) {
-            return "sunset"
+            return false
         } else {
-            return "sunrise"
+            return true
         }
     }
 
@@ -64,7 +64,7 @@ export function Forecast() {
                 {type === "h" ? data?.hourly.map((m, i) => {
                     return forecastDiv(m, i, setHourlyIcon(m), "h")
                 }) : type === "d" ? data?.daily.map((m, i) => {
-                    return forecastDiv(m, i, "sunrise", "d")
+                    return forecastDiv(m, i, true, "d")
                 })
                     : ""}
             </div>

@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalColors} from '../../context/contexts'
 
-function IconAll({ size, rain, clouds, id, sun, anim}) {
+function IconAll({ size, rain, clouds, id, day, anim}) {
     const {textColor} = useContext(GlobalColors)
     const thunder = (id >= 200 && id <= 232) ? true : false
     const [cloudsPCT, setCloudsPCT] = useState()
     const [cloudsOpacity, setCloudsOpacity] = useState()
     const [sunMoonOpacity, setSunMoonOpacity] = useState()
-
     useEffect(() => {
         if (rain || thunder) {
             if ((id >= 300 && id <= 321) || (id >= 500 && id <= 504)) {
@@ -25,7 +24,7 @@ function IconAll({ size, rain, clouds, id, sun, anim}) {
         } else {
             setCloudsPCT(clouds <=40 ? 0.6 : clouds / 100)
         }
-    }, [clouds, sun, rain, id, thunder])
+    }, [clouds, day, rain, id, thunder])
 
     const commonStyle = {
         transition: anim ? 'all 0.9s ease-in-out' : "",
@@ -33,13 +32,13 @@ function IconAll({ size, rain, clouds, id, sun, anim}) {
     const sunStyle = {
         opacity: (rain || thunder) ? sunMoonOpacity : 1,
         trasformOrigin: '0% 0%',
-        transform: sun === "sunrise" ? "translateX(0%)" : 'translateX(100%)',
+        transform: day ? "translateX(0%)" : 'translateX(100%)',
         stroke: textColor
     }
 
     const moonStyle = {
         opacity: (rain || thunder) ? sunMoonOpacity : 1,
-        transform: sun === "sunset" ? "translateX(0%)" : 'translateX(100%)',
+        transform: !day? "translateX(0%)" : 'translateX(100%)',
     }
     const cloudStyle = {
         top: { transformOrigin: '0% 30%', opacity: (rain || thunder) ? "1" : clouds / 100 },

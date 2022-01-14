@@ -14,7 +14,7 @@ export function Current() {
         <div className='current'>
             <div className='current-weather'>
                 <div className='current-weather-image'>
-                    <IconAll size={size.w} rain={rain} clouds={clouds} id={id} sun={day} anim={true} />
+                    <IconAll size={size.w} rain={rain} clouds={clouds} id={id} day={day} anim={true} />
                 </div>
                 <div className='current-weather-text'>
                     <h1 className='current-weather-text-temp'>{parseInt(data.current?.temp)}&deg;</h1>
