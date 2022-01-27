@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { GlobalData } from "../../context/contexts"
 
-export function useGraphData(data, graph) {
+export function useGraphData(dataType, graph) {
+    const { data } = useContext(GlobalData)
     const [arr, setArr] = useState()
     const [min, setMin] = useState()
     const [max, setMax] = useState()
@@ -8,12 +10,27 @@ export function useGraphData(data, graph) {
     const [yArr, setYArr] = useState()
     const [snow, setSnow] = useState([0])
     const [rain, setRain] = useState([0])
+    const [icon, setIcon] = useState()
+
+    const setHourlyIcon = (m) => {
+        if (dataType[0].temp?.day) {
+            return true
+
+        } else {
+            if (new Date(m.dt * 1000).getTime() < new Date(data.current.sunrise * 1000).getTime() || new Date(m.dt * 1000).getTime() > new Date(data.current.sunset * 1000).getTime()) {
+                return false
+            } else {
+                return true
+            }
+        }
+
+    }
 
     useEffect(() => {
-        setArr(data.slice(0, 8).map(m => {
+        setArr(dataType.slice(0, 7).map(m => {
             switch (graph) {
                 case "temp":
-                    return m.temp ? m.temp.day ? m.temp.day : m.temp : 0
+                    return Math.round(m.temp ? m.temp.day ? m.temp.day : m.temp : 0)
                 case 'rain':
                     return m.rain ? m.rain["1h"] ? m.rain["1h"] : m.rain : 0
                 case 'snow':
@@ -23,27 +40,29 @@ export function useGraphData(data, graph) {
                 case 'preci':
                     return Math.round(m.pop * 100)
                 case 'uvi':
-                    return m.uvi
+                    return Math.round(m.uvi)
                 default:
                     return m.temp
 
             }
         }))
-
+        setIcon(dataType.slice(0, 7).map(m => {
+            return { clouds: m.clouds, rain: m.rain ? true : false, snow: m.snow ? true : false, id: m.weather[0].id, day: setHourlyIcon(m) }
+        }))
 
         setSnow(
-            data.slice(0, 8).map(m => {
+            dataType.slice(0, 7).map(m => {
                 return m.snow ? m.snow : 0
             })
         )
         setRain(
-            data.slice(0, 8).map(m => {
+            dataType.slice(0, 7).map(m => {
                 return m.rain ? m.rain : 0
             })
 
         )
 
-    }, [data, graph])
+    }, [dataType, graph])
 
     useEffect(() => {
         if (arr) {
@@ -110,15 +129,25 @@ export function useGraphData(data, graph) {
                     break
                 case 'humidity':
                 case 'preci':
+                    const maxVal = Math.max(...arr)
                     setYLegend([parseInt(max), parseInt(max / 2), 0 + "%"])
                     setYArr(arr.map(m => {
-                        return 100 - m
+                        if(maxVal < 50) {
+                            return 50 - m
+                        } else {
+                            return 100 - m
+                        }
                     }))
                     break
                 case 'uvi':
+                    const check = (num) => {return num === 0}
                     setYLegend([max.toFixed(2), (max / 2).toFixed(2), 0])
                     setYArr(arr.map(m => {
-                        return 100 - (m * (100 / max))
+                        if (arr.every(check)){
+                            return 50 - (m * (50 / max))
+                        } else {
+                            return 100 - (m * (100 / max))
+                        }
                     }))
                     break
                 default:
@@ -128,8 +157,5 @@ export function useGraphData(data, graph) {
         }
 
     }, [graph, min, max, arr])
-
-
-
-    return [arr, yLeg, yArr, rain, snow]
+    return [arr, yLeg, yArr, rain, snow, icon]
 }

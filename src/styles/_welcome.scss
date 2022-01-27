@@ -1,0 +1,137 @@
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    gap: 2rem;
+    margin: auto;
+    height: 100vh;
+
+    &-title {
+        font-size: 4rem;
+        letter-spacing: 0.1rem;
+        opacity: 0.4;
+    }
+
+    &-card {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+        padding: 1.5rem 3rem 3rem 3rem;
+        background: rgba($color: #fff, $alpha: 0.5);
+        height: fit-content;
+        border-radius: 2rem;
+        box-shadow: 4px 4px 15px rgba($color: #000000, $alpha: 0.1);
+
+        &-title {
+            align-self: center;
+            font-size: 1.5rem;
+            letter-spacing: 0.2rem;
+            font-weight: 300;
+            opacity: 0.4;
+        }
+
+        &-search {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+
+            &-icon {
+                opacity: 0.4;
+                align-self: flex-end;
+                margin-top: 0.4rem;
+            }
+
+            &-input {
+                background: transparent;
+                border: none;
+                font-family: 'Barlow', serif;
+                letter-spacing: 0.1rem;
+                opacity: 0.4;
+                transition: all 0.5s ease-in-out;
+
+                &::placeholder {
+                    font-family: 'Barlow', serif;
+                    letter-spacing: 0.1rem;
+                    opacity: 0.5;
+                }
+
+                &:focus {
+                    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+                }
+
+                &-btn {
+                   
+                    background: transparent;
+                    transform: rotate(-90deg);
+
+                    &-close {
+                        background: transparent;
+                        opacity: 0.2;
+                        transition: all 0.5s ease-in-out;
+
+                        &:active {
+                            opacity: 0.4;
+                        }
+                    }
+                }
+            }
+
+            &-results {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                padding-left: 2rem;
+                transition: all 0.5s ease-in-out;
+                
+                &-btn {
+                    align-self: flex-start;
+                    background: transparent;
+                    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+                    font-family: 'Barlow', serif;
+                    letter-spacing: 0.1rem;
+                    font-size: 0.8rem;
+                    line-height: 0.7rem;
+                    opacity: 0.4;
+                    padding-bottom: 0.3rem;
+                    transition: all 0.1s ease-in-out;
+                
+
+                    &:active {
+                        opacity: 0.7;
+                        // font-size: 0.75rem;
+                        // line-height: 0.7rem;
+
+                    }
+                }
+            }
+
+
+        }
+
+        &-location {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+
+            &-icon {
+                opacity: 0.4;
+                margin-top: 0.5rem;
+            }
+
+            &-btn {
+                background: transparent;
+                border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+                font-family: 'Barlow', serif;
+                letter-spacing: 0.1rem;
+                opacity: 0.4;
+                transition: all 0.1s ease-in-out;
+
+                &:active {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}

@@ -1,49 +1,47 @@
-.current {
+.temp {
+    align-self: center;
     display: flex;
-    flex-direction: column;
-    height: 12rem;
+    flex-direction: row;
+    gap:0.5rem;
 
-    &-weather{
-        display: flex;
-        flex-direction: row;
-        align-self: flex-end;
-
-        &-text {
+        &-highlow {
             display: flex;
             flex-direction: column;
-            text-align: right;
-            letter-spacing: .1rem;
+            justify-content: center;
+            gap: 1rem;
+            @include respond-to(phonesmall) {
+                margin: auto;
+            }
 
-            &-temp {
-                font-size: 6rem;
-                opacity: .5;
-                margin-top: 1.5rem;
-                margin-bottom: .8rem;
-                @include respond-to(phoneSmaller) {
-                    font-size: 5rem;
+            &-common {
+                display: flex;
+                flex-direction: column;
+                gap: 0.1rem;
+                opacity: 0.4;
+            }
+
+            &-high {
+                &-arrow {
+                    transform: rotate(180deg);
+                    transform-origin: center;
+                    margin: auto;
                 }
             }
 
-            &-temp2 {
-                font-size: 1rem;
-                opacity: .7;
-                line-height: 1.5rem;
-
-            }
-
-            &-condition {
-                font-size: 2.2rem;
+            &-low {
+                &-arrow {
+                    margin: auto;
+                }
             }
         }
 
-        &-image {
-            position: absolute;
-            left: 4vw;
-            right: auto;
-            opacity: 0.5;
-            width: 80%;
-            // height: 80%;
+        &-main {
+            font-size: 3rem;
+            opacity: 0.3;
+
+            @include respond-to(phonesmall) {
+                font-size: 1.8rem;
+                margin: auto;
+            }
         }
     }
-
-}

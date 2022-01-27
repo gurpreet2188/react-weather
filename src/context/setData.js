@@ -1,48 +1,78 @@
-import React, { useEffect, useState } from 'react';
-import { useLoction } from '../fetch/location';
+import React, { createContext, useEffect, useState } from 'react';
+import { useLoction } from '../fetch/gpslocation';
 import GetData from '../fetch/data';
 import { LoadContext } from './loadContext';
+import { Welcome } from '../components/welcome';
+import { Loading } from '../components/loading';
+import { countryName } from '../fetch/countryName';
 
+export const latlonData = createContext(null)
 
 export function SetData() {
-    const [stat, setStat] = useState(0)
-    const { lat, lon } = useLoction()
-    const [update, setUpdate] = useState(false)
-    // 49.8537377 -97.2923063
-    //const [lat, lon] = [1.4107, 103.8796] // sg
-    //const [lat, lon] = [49.8537377,-97.2923063] // canada
-    // const [lat ,lon] = [18.9754008,72.8415103] //mumbai
+    const [loadWelcome, setLoadWelcome] = useState(false)
+    const [stat, setStat] = useState(false)
+    const [delay, setDelay] = useState(false)
+    const [latlon, setlatlon] = useState(false)
+    const [lat, setLat] = useState()
+    const [lon, setLon] = useState()
+
     const t = localStorage.getItem('time')
     const n = localStorage.getItem('name')
     const o = localStorage.getItem('main')
     const a = localStorage.getItem('air')
 
     useEffect(() => {
-        const date = new Date()
-        if (t && n && o && a) {
-            if (parseInt(t) < date.getTime() - 600000) {
-                setUpdate(true)
-            } else {
-                setUpdate(false)
-            }
-        } else if (t === null || n === null || o === null || a === null) {
-            console.log('downloading weather info.....')
-            GetData(lat, lon, setStat, stat)
+        if (localStorage.getItem('location') !== null) {
+            const pos = JSON.parse(localStorage.getItem('location'))
+            setLat(pos.lat)
+            setLon(pos.lon)
         }
-    }, [t, n, o, a, lat, lon, stat])
-
+    }, [latlon, localStorage.getItem('location')])
 
     useEffect(() => {
-        if (lat && lon) {
-            if (update) {
-                GetData(lat, lon, setStat, stat)
+        const date = new Date().getTime() - 600000 // 10 min
+        const dateLonger = new Date().getTime() - 604800000 // 7 days 
+        if (t && n && o && a) {
+            setLoadWelcome(false)
+            setTimeout(() => { setDelay(true) }, 1510)
+            setStat(true)
+
+            if (parseInt(t) <= dateLonger) {
+                localStorage.clear() // detele all data and reset to welcome page if data is 1 week or more old
             }
+
+            if (parseInt(t) <= date) {
+                if (lat && lon) {
+                    console.log('test data')
+                    GetData(lat, lon)
+                    countryName()
+                }
+            }
+        } else if (t === null || n === null || o === null || a === null) {
+            if (lat && lon) {
+                setStat(true)
+                setLoadWelcome(false)
+                setTimeout(() => { setDelay(true) }, 1510)
+                GetData(lat, lon)
+                countryName()
+            } else {
+                setDelay(false)
+            }
+
+        } else {
+            setDelay(false)
         }
-    }, [lat, lon, t, n, o, a, stat, update])
+    }, [lat, lon, t, n, o, a])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoadWelcome(true)
+        }, 500)
+    }, [])
 
     return (
-        <>
-            {(t && n && a && o) ? <LoadContext /> : "Waiting for Location..."}
-        </>
+        <latlonData.Provider value={{latlon, setlatlon}}>
+            {stat ? delay ? <LoadContext /> : <Loading /> : <Welcome load={loadWelcome} />}
+        </latlonData.Provider>
     )
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-export default function GetData(lat, lon, setStat) {
+export default function GetData(lat, lon) {
     const date = new Date()
     return axios.all([
         axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=3&appid=${process.env.REACT_APP_KEY}`),
@@ -10,6 +10,5 @@ export default function GetData(lat, lon, setStat) {
         localStorage.setItem('name', JSON.stringify(name.data[0]))
         localStorage.setItem('main', JSON.stringify(main.data))
         localStorage.setItem('air', JSON.stringify(air.data))
-        setStat(4)
     }))
 }

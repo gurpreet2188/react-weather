@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { GlobalColors, GlobalTime } from "../../context/contexts"
+import IconAll from "./iconWeather"
 
-export function Graph({ points, axisX, axisY, show, dots, info, click }) {
+export function Graph({ points, axisX, axisY, show, dots, info, click, icon, graph }) {
     const { day } = useContext(GlobalTime)
     const { textColor } = useContext(GlobalColors)
     const [v, setV] = useState(100)
@@ -11,42 +12,46 @@ export function Graph({ points, axisX, axisY, show, dots, info, click }) {
     // console.log(show)
     return (
         <div className="graph-flex">
-            <svg viewBox={`0 -20 315 150`} width="100%" height="100%" onClick={click}>
+            <svg viewBox={`20 -70 300 200`} width="100%" height="100%" onClick={click}>
 
-                <g>
-                    {axisY}
+                <g className="forecast-data-chart-show" style={{ transition: 'all .5s ease-in-out' }}>
+                    <polyline
+                        fill="none"
+                        stroke={textColor}
+                        strokeWidth="0.4"
+                        strokeDasharray="4 7"
+                        opacity={0.5}
+                        style={{ transition: 'all .5s ease-in-out' }}
+                        points={points}
+                    />
                 </g>
 
-                <g>
+                <g style={{ transition: 'all .5s ease-in-out' }}>
                     {axisX}
                 </g>
+                <g style={{ transition: 'all .5s ease-in-out' }}>
+                    {icon}
+                </g>
 
+                <g>
+                    <text x={20} y={-62} style={{ fontSize: '0.7rem', fontFamily: "'Barlow', serif",fontWeight: 100, opacity: 0.6, fill: textColor }}>{graph === 'rain' ? "Rain (mm)"
+                        : graph === 'temp' ? 'Temperature' :
+                            graph === 'humidity' ? 'Humidity (%)' :
+                                graph === 'uvi' ? 'UltraVoilet Index' :
+                                    graph === 'snow' ? 'Snow (mm)' :
+                                        graph === 'preci' ? 'Precipitation (%)' : ''}</text>
+                </g>
 
-                <line x1="46" x2="46" y1="0" y2="100" stroke={textColor} strokeWidth="1px"></line>
-                <line x1="300" x2="300" y1="0" y2="100" stroke={textColor} strokeWidth="1px"></line>
-                <line x1="46" x2="300" y1="100" y2="100" stroke={textColor} strokeWidth="1px"></line>
-                <line x1="46" x2="300" y1="0" y2="0" stroke={textColor} strokeWidth="1px"></line>
-                <line x1="46" x2="300" y1="50" y2="50" stroke={day ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)"} strokeWidth="1px"></line>
                 <linearGradient id="rGradient" gradientTransform="rotate(90)" spreadMethod="pad">
                     <stop offset="0%" stopColor={`hsl(${hsl.h}, ${hsl.s}%,${40}%)`} />
                     <stop offset="100%" stopColor={`hsl(${hsl.h}, ${hsl.s}%,${v}%, 0)`} />
                 </linearGradient>
 
-                <g className={show ? "forecast-data-chart-show" : "forecast-data-chart-hide"} style={{ transition: 'all .5s ease-in-out' }}>
-                    <polygon
-                        fill={`hsl(${hsl.h}, ${hsl.s}%,${hsl.l}%, 0.2)`}
-                        stroke={textColor}
-                        style={{ transition: 'all .5s ease-in-out' }}
-                        strokeWidth="1"
-                        points={`46,100 ${points} 300,100`}
-                    />
-                </g>
-                {/* {console.log(points)} */}
-                <g fill={`hsl(${hsl.h}, ${hsl.s}%,${60}%)`} stroke={textColor}>
+                <g fill={`hsl(${hsl.h}, ${hsl.s}%,${60}%)`} stroke={textColor} style={{ transition: 'all .5s ease-in-out' }}>
                     {dots}
                 </g>
 
-                <g>
+                <g style={{ transition: 'all .5s ease-in-out' }}>
                     {info}
                 </g>
 

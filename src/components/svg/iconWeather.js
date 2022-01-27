@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalColors} from '../../context/contexts'
 
-function IconAll({ size, rain, clouds, id, day, anim}) {
+function IconAll({ size, rain, clouds, id, day, anim, color}) {
     const {textColor} = useContext(GlobalColors)
     const thunder = (id >= 200 && id <= 232) ? true : false
     const [cloudsPCT, setCloudsPCT] = useState()
@@ -66,7 +66,7 @@ function IconAll({ size, rain, clouds, id, day, anim}) {
     return (
         <svg width={size} height={size} viewBox="0 0 128 128" style={{ transition: 'all .5s ease' }} fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" style={{ ...moonStyle, ...commonStyle }} id="moon" clipRule="evenodd" d="M107.007 96.6602C103.146 97.537 99.1269 98 95 98C65.1766 98 41 73.8234 41 44C41 31.7263 45.0948 20.409 51.9928 11.3397C27.9485 16.7991 10 38.3035 10 64C10 93.8234 34.1766 118 64 118C81.5497 118 97.1441 109.628 107.007 96.6602Z" fill="url(#paint0_radial_51_40)" />
-            <circle id="sun" style={{...sunStyle, ...commonStyle}} cx="64" cy="64" r="54" fill="url(#sunGradient)" />
+            <circle id="sun" style={{...sunStyle, ...commonStyle}} cx="64" cy="64" r="54" fill={color ? "url(#sunGradient)" : "none"} />
             <path fillRule="evenodd"  style={{ ...cloudStyle.common, ...cloudStyle.bottom, ...commonStyle }} id="cloud2" clipRule="evenodd" d="M45.516 45C25.9039 45 10 61.3411 10 81.5C10 101.659 25.9039 118 45.516 118C84.322 117.766 73.2246 117.87 92.558 117.875C106.613 117.875 118 106.166 118 91.7261C117.995 77.2912 106.608 65.5879 92.558 65.5879C87.7943 65.5934 83.1217 66.9782 79.0868 69.5795C74.1409 54.8677 60.659 45 45.516 45V45Z" />
             <path fillRule="evenodd"  style={{ ...cloudStyle.common, ...cloudStyle.top, ...commonStyle }} id="cloud1" clipRule="evenodd" d="M83.7995 10C102.685 10 118 25.6695 118 45C118 64.3305 102.685 80 83.7995 80C46.4307 79.7761 57.117 79.875 38.4997 79.8802C24.965 79.8802 14 68.6527 14 54.8058C14.0052 40.9641 24.9702 29.7418 38.4997 29.7418C43.087 29.7471 47.5865 31.075 51.472 33.5694C56.2347 19.4621 69.2173 10 83.7995 10V10Z" />
             <g id="rain" style={{ ...rainStyle, ...commonStyle }} >

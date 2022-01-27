@@ -1,76 +1,83 @@
 import { useContext, useState } from "react"
-import { GlobalColors, GlobalData } from "../context/contexts"
-import IconAll from "./svg/iconWeather"
+import { GlobalColors } from "../context/contexts"
 import { Graphs } from "./graphs/main"
-import { IconChart } from './svg/iconChart'
+import { IconDaily } from "./svg/iconDaily"
+import { IconHourly } from "./svg/iconHourly"
+import { IconHumidity } from "./svg/iconHumidity"
+import { IconPreci } from "./svg/iconPreci"
+import { IconRain } from "./svg/iconRain"
+import { IconSnow } from "./svg/iconSnow"
+import { IconTemp } from "./svg/iconTemp"
+import { IconUv } from "./svg/iconUv"
+
 
 export function Forecast() {
-    const { data } = useContext(GlobalData)
     const { textColor } = useContext(GlobalColors)
-    const size = { w: 30, h: 24 }
     const [poly, setPoly] = useState(false)
     const [type, setType] = useState("h")
+    const [showSnow, setShowSnow] = useState(true)
+    const [showRain, setShowRain] = useState(true)
+    const [graph, setGraph] = useState("temp")
     const switchType = () => { type === "h" ? setType("d") : setType("h") }
-    const [graphs, setGraphs] = useState(false)
-    const toggleGraphs = () => {
+
+    const switchGraph = (type) => {
+        setGraph(type)
         setPoly(true)
-        !graphs ? setGraphs(true) : setGraphs(false)
     }
 
-    const date = (data, dataType) => {
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-        const duration = dataType === 'd' ? days[new Date(data).getDay()] : new Date(data).getHours()
-        return duration
-    }
+    const graphPreci = () => switchGraph("preci")
+    const graphRain = () => switchGraph("rain")
+    const graphSnow = () => switchGraph("snow")
+    const graphHumidity = () => switchGraph("humidity")
+    const graphUVI = () => switchGraph("uvi")
+    const graphTemp = () => switchGraph("temp")
 
-    const forecastDiv = (m, i, sunType, dataType) => {
-        if (i >= 0 && i <= 5) {
-            return <div key={i} className="forecast-data-contents">
-                <p className="forecast-data-content-temp">{parseInt(m.temp.day ? m.temp.day : m.temp)}&deg;</p>
-                <div className="forecast-data-content-icons">
-
-                    {<IconAll key={i} size={size.w} clouds={m.clouds} rain={m.rain ? true : false} id={m.weather[0].id} day={sunType} anim={true} />}
-
-                </div>
-                {/* <p  className="forecast-data-content-extra">{m?.rain ? m.rain[Object.keys(m.rain)]: 0}</p> */}
-                <p className="forecast-data-content-period">{date(m.dt * 1000, dataType)}</p>
-            </div>
-
-        }
-
-    }
-
-    const setHourlyIcon = (m) => {
-        if (new Date(m.dt * 1000).getTime() < new Date(data.current.sunrise * 1000).getTime() || new Date(m.dt * 1000).getTime() > new Date(data.current.sunset * 1000).getTime()) {
-            return false
-        } else {
-            return true
+    const btnStyles = (g) => {
+        return {
+            opacity: graph === g ? 0.5 : 0.25,
+            background: "transparent"
         }
     }
+
+
 
     return (
         <div className="forecast">
             <div className="forecast-header">
-
-                <button className="forecast-header-switch" onClick={switchType} style={{ color: textColor }}>
-                    <h3 style={{ opacity: type === 'h' ? "1" : "0.5" }}>Hourly</h3>
-                    <h3 style={{ opacity: type === 'd' ? "1" : "0.5" }}>Daily</h3>
-                </button>
-                <div className='forecast-header-chart' onClick={toggleGraphs} style={{ color: textColor, transition: 'all .5s ease', opacity: graphs ? ".8" : ".4", stroke: textColor }}>
-                    <IconChart w={24} h={24} />
+                <div className="forecast-header-switch" style={{ color: textColor }}>
+                    <button onClick={switchType} className="forecast-header-switch-time">
+                        <div style={{ opacity: type === 'h' ? "0.5" : "0.25" }}>
+                            <IconHourly s={15} />
+                        </div>
+                        <div style={{ opacity: type === 'd' ? "0.5" : "0.25" }}>
+                            <IconDaily s={15} />
+                        </div>
+                    </button>
+                    <button className="forecast-header-switch-types">
+                        <button onClick={graphTemp} style={{ ...btnStyles('temp') }}>
+                            <IconTemp s={15} />
+                        </button>
+                        <button onClick={graphRain} style={{ ...btnStyles('rain'), display: showRain? "" : "none" }}>
+                            <IconRain s={15} />
+                        </button>
+                        <button onClick={graphSnow} style={{ ...btnStyles('snow'), display: showSnow? "" : "none"  }}>
+                            <IconSnow s={15} />
+                        </button>
+                        <button onClick={graphUVI} style={{ ...btnStyles('uvi') }}>
+                            <IconUv s={15} />
+                        </button>
+                        <button onClick={graphPreci} style={{ ...btnStyles('preci') }}>
+                            <IconPreci s={15} />
+                        </button>
+                        <button onClick={graphHumidity} style={{ ...btnStyles('humidity') }}>
+                            <IconHumidity s={15} />
+                        </button>
+                    </button>
                 </div>
+                <button className="forecast-header-border"></button>
             </div>
-            <div className="forecast-data" style={{ display: graphs ? "none" : "" }}>
-                {type === "h" ? data?.hourly.map((m, i) => {
-                    return forecastDiv(m, i, setHourlyIcon(m), "h")
-                }) : type === "d" ? data?.daily.map((m, i) => {
-                    return forecastDiv(m, i, true, "d")
-                })
-                    : ""}
-            </div>
-
-            <div style={{ display: graphs ? "" : "none" }} >
-                <Graphs type={type} setPoly={setPoly} poly={poly} />
+            <div>
+                <Graphs type={type} setPoly={setPoly} poly={poly} setShowRain={setShowRain} setShowSnow={setShowSnow} graph={graph} />
             </div>
         </div>
     )
