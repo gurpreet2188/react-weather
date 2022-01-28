@@ -48,13 +48,15 @@
                 border: none;
                 font-family: 'Barlow', serif;
                 letter-spacing: 0.1rem;
+                font-weight: 400;
                 opacity: 0.4;
                 transition: all 0.5s ease-in-out;
 
                 &::placeholder {
                     font-family: 'Barlow', serif;
                     letter-spacing: 0.1rem;
-                    opacity: 0.5;
+                    font-weight: 400;
+                    opacity: 1;
                 }
 
                 &:focus {
@@ -90,12 +92,14 @@
                     background: transparent;
                     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
                     font-family: 'Barlow', serif;
+                    font-weight: 400;
                     letter-spacing: 0.1rem;
                     font-size: 0.8rem;
                     line-height: 0.7rem;
                     opacity: 0.4;
                     padding-bottom: 0.3rem;
                     transition: all 0.1s ease-in-out;
+                    max-width: 30ch;
                 
 
                     &:active {
@@ -125,6 +129,7 @@
                 border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
                 font-family: 'Barlow', serif;
                 letter-spacing: 0.1rem;
+                font-weight: 400;
                 opacity: 0.4;
                 transition: all 0.1s ease-in-out;
 

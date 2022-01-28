@@ -28,8 +28,6 @@ export function Home() {
         window.location.reload(false)
     }
 
-    console.log(settings)
-
     return (
         <ForecastContext.Provider value={{ forecastOpen, setForecastOpen }}>
             <div className='home-settings' style={{ transform: `translateX(${settings ? 50 : 200}%)`, background: `hsl(${hsl.h},${hsl.s}%,${hsl.l}%, 95%)`}}>

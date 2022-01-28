@@ -2,7 +2,6 @@ import React from 'react';
 import { IconSun } from './svg/iconSun';
 
 export function Loading() {
-    console.log('test loading compo')
     return (
         <div className='loading'>
             <div className='loading-bar'>

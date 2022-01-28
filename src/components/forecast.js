@@ -9,6 +9,7 @@ import { IconRain } from "./svg/iconRain"
 import { IconSnow } from "./svg/iconSnow"
 import { IconTemp } from "./svg/iconTemp"
 import { IconUv } from "./svg/iconUv"
+import { IconWind } from "./svg/iconWind"
 
 
 export function Forecast() {
@@ -31,6 +32,7 @@ export function Forecast() {
     const graphHumidity = () => switchGraph("humidity")
     const graphUVI = () => switchGraph("uvi")
     const graphTemp = () => switchGraph("temp")
+    const graphWind = () => switchGraph("wind")
 
     const btnStyles = (g) => {
         return {
@@ -57,20 +59,23 @@ export function Forecast() {
                         <button onClick={graphTemp} style={{ ...btnStyles('temp') }}>
                             <IconTemp s={15} />
                         </button>
+                        <button onClick={graphHumidity} style={{ ...btnStyles('humidity') }}>
+                            <IconHumidity s={15} />
+                        </button>
+                        <button onClick={graphPreci} style={{ ...btnStyles('preci') }}>
+                            <IconPreci s={15} />
+                        </button>
+                        <button onClick={graphUVI} style={{ ...btnStyles('uvi') }}>
+                            <IconUv s={15} />
+                        </button>
+                        <button onClick={graphWind} style={{ ...btnStyles('wind') }}>
+                            <IconWind s={15} />
+                        </button>
                         <button onClick={graphRain} style={{ ...btnStyles('rain'), display: showRain? "" : "none" }}>
                             <IconRain s={15} />
                         </button>
                         <button onClick={graphSnow} style={{ ...btnStyles('snow'), display: showSnow? "" : "none"  }}>
                             <IconSnow s={15} />
-                        </button>
-                        <button onClick={graphUVI} style={{ ...btnStyles('uvi') }}>
-                            <IconUv s={15} />
-                        </button>
-                        <button onClick={graphPreci} style={{ ...btnStyles('preci') }}>
-                            <IconPreci s={15} />
-                        </button>
-                        <button onClick={graphHumidity} style={{ ...btnStyles('humidity') }}>
-                            <IconHumidity s={15} />
                         </button>
                     </button>
                 </div>

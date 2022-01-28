@@ -34,12 +34,12 @@ export function Graph({ points, axisX, axisY, show, dots, info, click, icon, gra
                 </g>
 
                 <g>
-                    <text x={20} y={-62} style={{ fontSize: '0.7rem', fontFamily: "'Barlow', serif",fontWeight: 100, opacity: 0.6, fill: textColor }}>{graph === 'rain' ? "Rain (mm)"
+                    <text x={140} y={126} style={{ fontSize: '0.7rem', fontFamily: "'Barlow', serif",fontWeight: 100, opacity: 0.6, fill: textColor }}>{graph === 'rain' ? "Rain (mm)"
                         : graph === 'temp' ? 'Temperature' :
                             graph === 'humidity' ? 'Humidity (%)' :
                                 graph === 'uvi' ? 'UltraVoilet Index' :
                                     graph === 'snow' ? 'Snow (mm)' :
-                                        graph === 'preci' ? 'Precipitation (%)' : ''}</text>
+                                        graph === 'preci' ? 'Precipitation (%)' : graph === 'wind' ? 'Wind (m/s)' : ''}</text>
                 </g>
 
                 <linearGradient id="rGradient" gradientTransform="rotate(90)" spreadMethod="pad">

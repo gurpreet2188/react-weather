@@ -12,7 +12,6 @@ export function Header() {
     useEffect(() => {
         cTemp.data.find(n => n.code === countryCode ? setCountry(n.name) : "")
     }, [cTemp])
-    console.log(city)
     return (
         <div className='home-header'>
                 <h1 className='header-title'>{city ? city : name.name}</h1>

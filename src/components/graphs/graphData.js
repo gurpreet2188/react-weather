@@ -11,6 +11,7 @@ export function useGraphData(dataType, graph) {
     const [snow, setSnow] = useState([0])
     const [rain, setRain] = useState([0])
     const [icon, setIcon] = useState()
+    const [windDeg, setWindDeg] = useState()
 
     const setHourlyIcon = (m) => {
         if (dataType[0].temp?.day) {
@@ -41,13 +42,20 @@ export function useGraphData(dataType, graph) {
                     return Math.round(m.pop * 100)
                 case 'uvi':
                     return Math.round(m.uvi)
+                case 'wind':
+                    return m.wind_speed ? m.wind_speed : 0
                 default:
                     return m.temp
 
             }
         }))
+
         setIcon(dataType.slice(0, 7).map(m => {
             return { clouds: m.clouds, rain: m.rain ? true : false, snow: m.snow ? true : false, id: m.weather[0].id, day: setHourlyIcon(m) }
+        }))
+
+        setWindDeg(dataType.slice(0,7).map (m => {
+            return m.wind_deg
         }))
 
         setSnow(
@@ -71,6 +79,7 @@ export function useGraphData(dataType, graph) {
                     setMax(Math.max(...arr) + 2)
                     setMin(Math.min(...arr) - 2)
                     break
+                case 'wind':
                 case 'uvi':
                 case 'rain':
                 case 'snow':
@@ -120,6 +129,7 @@ export function useGraphData(dataType, graph) {
                         )
                     }
                     break
+                case 'wind':
                 case 'rain':
                 case 'snow':
                     setYLegend([max.toFixed(2), (max / 2).toFixed(2), 0 + "mm"])
@@ -157,5 +167,5 @@ export function useGraphData(dataType, graph) {
         }
 
     }, [graph, min, max, arr])
-    return [arr, yLeg, yArr, rain, snow, icon]
+    return [arr, yLeg, yArr, rain, snow, icon, windDeg]
 }
