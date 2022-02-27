@@ -1,13 +1,54 @@
 $font-barlow:  'Barlow', serif;
+$font-big-title: 4rem;
 $font-title: 1.8rem;
 $font-subtitle: .8rem;
 $font-content: 1.3rem;
+$font-btn: 1.2rem;
 
-$breakpoints : (
-    'phoneSmallest': 321px,
-    'phoneSmaller': 374px,
-    'phonesmall': 375px,
-    'tabletMedium': 770px,
-    'tabletLarge': 1000px,
-    'desktop': 1200px
-)
+// Using css variables for light/mode dark mode colors.
+:root {
+    --color-bg: #fff1e6;
+    --color-fg: 0,0,0;
+    --color-txt: #000;
+    --color-err: 187,62,3;
+}
+
+@media (prefers-color-scheme: dark){
+    :root {
+        --color-bg: #6D597A;
+        --color-fg: 255, 255, 255;
+        --color-txt: #fff;
+    }
+}
+
+@mixin size($breakpoints) {
+        @if $breakpoints == desktop {
+            @media only screen and (min-width: 1200px) {
+                @content;
+            }
+        } @else if $breakpoints == tabletSmall {
+            @media only screen and (min-width: 700px) {
+                @content;
+            }
+        } @else if $breakpoints == tabletSmallLand {
+            @media screen and (orientation: landscape) and (min-width: 700px) {
+                @content;
+            }
+        }@else if $breakpoints == phoneLand {
+            @media screen and (orientation: landscape) and (min-width: 300px) {
+                @content;
+            }
+        }
+}
+
+@mixin color($mode) {
+    @if $mode == light {
+        @media (prefers-color-scheme: light){
+            @content;
+        }
+    }@else if $mode == dark {
+        @media (prefers-color-scheme: dark){
+            @content;
+        }
+    }
+}

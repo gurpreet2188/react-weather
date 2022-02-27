@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { GlobalColors, GlobalTime } from "../../context/contexts"
 import IconAll from "./iconWeather"
 
-export function Graph({ points, axisX, axisY, show, dots, info, click, icon, graph }) {
+export function Graph({ points, axisX, axisY, show, dots, info, click, icon, graph, snowRain, pValue }) {
     const { day } = useContext(GlobalTime)
     const { textColor } = useContext(GlobalColors)
     const [v, setV] = useState(100)
@@ -11,10 +11,11 @@ export function Graph({ points, axisX, axisY, show, dots, info, click, icon, gra
     const { hsl } = useContext(GlobalColors)
     // console.log(show)
     return (
+        //20 -70 300 200
         <div className="graph-flex">
-            <svg viewBox={`20 -70 300 200`} width="100%" height="100%" onClick={click}>
+            <svg viewBox={`0 -70 300 220`} width="100%" height="100%" onClick={click}>
 
-                <g className="forecast-data-chart-show" style={{ transition: 'all .5s ease-in-out' }}>
+                <g className="forecast-data-chart-show" >
                     <polyline
                         fill="none"
                         stroke={textColor}
@@ -26,6 +27,11 @@ export function Graph({ points, axisX, axisY, show, dots, info, click, icon, gra
                     />
                 </g>
 
+                <g style={{ opacity: (graph === 'rain' || graph === 'snow') ? 0.8 : 0 }}>
+                    {snowRain}
+                    {pValue}
+                </g>
+
                 <g style={{ transition: 'all .5s ease-in-out' }}>
                     {axisX}
                 </g>
@@ -34,11 +40,11 @@ export function Graph({ points, axisX, axisY, show, dots, info, click, icon, gra
                 </g>
 
                 <g>
-                    <text x={140} y={126} style={{ fontSize: '0.7rem', fontFamily: "'Barlow', serif",fontWeight: 100, opacity: 0.6, fill: textColor }}>{graph === 'rain' ? "Rain (mm)"
+                    <text x={150} y={126} style={{ fill: textColor }} dominantBaseline='middle' className="forecast-data-chart-main forecast-data-chart-main-footer">{graph === 'rain' ? "---Rain(mm) / Precipitation(%)"
                         : graph === 'temp' ? 'Temperature' :
                             graph === 'humidity' ? 'Humidity (%)' :
                                 graph === 'uvi' ? 'UltraVoilet Index' :
-                                    graph === 'snow' ? 'Snow (mm)' :
+                                    graph === 'snow' ? '---Snow(mm) / Precipitation(%)' :
                                         graph === 'preci' ? 'Precipitation (%)' : graph === 'wind' ? 'Wind (m/s)' : ''}</text>
                 </g>
 
@@ -47,7 +53,7 @@ export function Graph({ points, axisX, axisY, show, dots, info, click, icon, gra
                     <stop offset="100%" stopColor={`hsl(${hsl.h}, ${hsl.s}%,${v}%, 0)`} />
                 </linearGradient>
 
-                <g fill={`hsl(${hsl.h}, ${hsl.s}%,${60}%)`} stroke={textColor} style={{ transition: 'all .5s ease-in-out' }}>
+                <g fill={`hsl(${hsl.h}, ${hsl.s}%,${60}%)`} stroke={textColor} style={{ opacity: (graph !== 'rain' && graph !== 'snow') ? 1 : 0 }}>
                     {dots}
                 </g>
 

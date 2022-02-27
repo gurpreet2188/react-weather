@@ -1,140 +1,74 @@
 .home {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    height: 100vh;
-    padding: 2rem;
+    // padding: 2rem;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 
-    &-header {
-        @extend .header;
-    }
-
     &-settings {
+        position: absolute;
         display: flex;
-        flex-direction: column;
-        position: fixed;
-        z-index: 100;
-        height: 100%;
-        width: 50%;
-        
-        // transform: translateX(100%);
-        overflow: hidden;
+        height: 100vh;
+        width: 100%;
+        background: rgba(var(--color-fg), $alpha: 0.4);
         transition: all 0.5s ease-in-out;
-        padding: 2rem 2rem 2rem 2rem;
-
-
-        &-location {
-            padding: 2rem 0rem 0rem 0rem;
-            align-self: center;
-            &-btn {
-                background: transparent;
-                border-bottom: 1px solid ;
-                padding: 0.4rem;
-                font-size: 0.8rem;
-                opacity: 0.5;
-            }
-        }
+        overflow: hidden;
 
         &-btn {
             position: absolute;
-            background: transparent;
-            opacity: 0.5;
-            right: 2rem;
-            top: 2rem;
+            opacity: 1;
         }
 
-        &-closebtn {
-            align-self: flex-end;
-            background: transparent;
-            opacity: 0.5;
-            
-        }
 
+        &-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 2rem;
+            margin: auto;
+            height: 30vh;
+            width: 70vw;
+            background: rgba(var(--color-fg), $alpha: 0.7);
+            border-radius: 2rem;
+
+            &-close {
+                align-self: flex-end;
+                background: transparent;
+                opacity: 0.5;
+                stroke: var(--color-bg);
+            }
+    
+            &-reset {
+                color: #fff;
+                
+            }
+
+        }
 
     }
 
-    &-card {
+    &-weather {
         display: flex;
         flex-direction: column;
-        gap: 2.4rem;
-        padding: 1rem 3rem 1rem 3rem;
-        height: fit-content;
-        border-radius: 2rem;
-        box-shadow: 4px 4px 15px rgba($color: #000000, $alpha: 0.1);
-        overflow-y: hidden;
-
-        @include respond-to(phonesmall) {
-            display: grid;
-            gap: 2rem;
-            grid-template-areas: 
-            'title title' 
-            'icon temp';
-            padding: 1rem 1rem 1rem 1rem;
-        }
-    
-        &-title {
-            align-self: center;
-            font-size: 1.5rem;
-            letter-spacing: 0.2rem;
-            font-weight: 300;
-            opacity: 0.4;
-            overflow-y: hidden;
-            grid-area: title;
-
-            @include respond-to (phonesmall) {
-                text-align: center;
-            }
-
-        }
+        justify-content: center;
 
         &-image {
-            align-self: center;
-            opacity: 0.4;
-            overflow-y: hidden;
-            grid-area: icon;
-            @include respond-to (phonesmall) {
-                margin: auto;
-            }
+            align-self: flex-end;
+        }
+
+        &-stats {
+            align-self: flex-start;
         }
 
         &-temp {
-            @extend .temp;
-            overflow-y: hidden;
-            grid-area: temp;
+            align-self: flex-end;
+            display: flex;
 
-            &-highlow {
-                @extend .temp-highlow;
 
-                &-high, &-low {
-                    @extend .temp-highlow-common;
-                    &-arrow {
-                        opacity: 0.5;
-                    }
-                }
 
-                &-high {
-                    &-arrow {
-                        @extend .temp-highlow-high-arrow;
-                    }
-                }
-
-                &-low {
-                    &-arrow {
-                        @extend .temp-highlow-low-arrow;
-                    }
-                }
-
-            }
-
-            &-main {
-                @extend .temp-main;
-                overflow-y: hidden;
-
-            }
         }
-
-
-
     }
+
 }

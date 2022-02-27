@@ -1,9 +1,21 @@
-* {
+*, *::after, *::before {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0;
     outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
 }
+
+body{
+    background: var(--color-bg);
+    stroke: rgb(var(--color-fg));
+    fill: rgb(var(--color-fg));
+    color: var(--color-txt);
+}
+
 
 h1,h2 {
     font-family: 'Montserrat', sans-serif;
@@ -15,7 +27,7 @@ h3,h4,p,button,input,:link {
     font-weight: 200;
 }
 
-a, a:hover, a:focus, a:active, a:link {
+a, a:hover, a:focus, a:active, a:link, button {
     text-decoration: none;
     color: inherit;
     border: none;
@@ -23,9 +35,33 @@ a, a:hover, a:focus, a:active, a:link {
     background-color: transparent;
 }
 
-.div-bg {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
+.button {
+
+    &-icon {
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        background-clip: padding-box;
+        transition: all 1s ease-in-out;
+        &:active {
+            background: rgba($color: var(--color-fg), $alpha: 0.2);
+        }
+    }
+
+    &-text {
+        background: transparent;
+        border-radius: 2rem;
+        padding: 0.5rem;
+        height: fit-content;
+        background-clip: padding-box;
+        line-height: normal;
+        letter-spacing: 0.1rem;
+        text-align: center;
+        font-size: 0.8rem;
+        border: 1px solid rgba(var(--color-fg), 0.2);
+
+        &:disabled {
+            border: 1px solid rgba(var(--color-err), 0.7);
+        }
+    }
 }

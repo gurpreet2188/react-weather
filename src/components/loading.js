@@ -1,14 +1,11 @@
 import React from 'react';
-import { IconSun } from './svg/iconSun';
+import { IconWeatherAll } from './svg/iconWeatherAll';
 
 export function Loading() {
     return (
         <div className='loading'>
             <div className='loading-bar'>
-                <div className='loading-anim'>
-                    <IconSun s={200} />
-                </div>
-                <h3 className='loading-bar-text'>Loading...</h3>
+                <IconWeatherAll size={150} rain={false} snow={false} id={0} clouds={0} day={true} iconColor="#fff" anim={true} />
             </div>
         </div>
     )

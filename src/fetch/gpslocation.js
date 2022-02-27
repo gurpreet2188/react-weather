@@ -4,7 +4,7 @@ export function gpsLoction(setlatlon, setGPSErr) {
             localStorage.setItem('location', JSON.stringify({ lat: pos.coords.latitude, lon: pos.coords.longitude }))
             setlatlon(true)
         }, err => {
-            if (err.code == err.PERMISSION_DENIED) {
+            if (err.code === err.PERMISSION_DENIED) {
                 setGPSErr("Permission Denied.")
             }
         })

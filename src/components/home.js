@@ -1,16 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Header } from './header'
-import { IconArrowUpDown } from './svg/iconArrow'
 import { Current } from './current';
-import { CurrentStats } from './current-stats';
 import { Forecast } from './forecast';
 import { GlobalColors, GlobalTime } from '../context/contexts';
-import { IconSettings } from './svg/iconSettings';
-import { IconCross } from './svg/iconCross';
+import { useResponsive } from './responsive';
+import { CommonIcons } from './svg/commonIcons';
 
 export const ForecastContext = createContext(null)
 
 export function Home() {
+    const { desktop } = useResponsive()
     const [forecastOpen, setForecastOpen] = useState(false)
     const { textColor, hsl, hslSec } = useContext(GlobalColors)
     const { day } = useContext(GlobalTime)
@@ -30,30 +29,36 @@ export function Home() {
 
     return (
         <ForecastContext.Provider value={{ forecastOpen, setForecastOpen }}>
-            <div className='home-settings' style={{ transform: `translateX(${settings ? 50 : 200}%)`, background: `hsl(${hsl.h},${hsl.s}%,${hsl.l}%, 95%)`}}>
-                <button onClick={() => { setSettings(!settings) }} className='home-settings-closebtn' style={{fill: textColor}}>
-                    <IconCross s={15}/>
-                </button>
-                <div className='home-settings-location'>
-                    <button onClick={changeLocation} className='home-settings-location-btn' style={{color: textColor}}>Change current City.</button>
-                </div>
-            </div>
+            {/* <div style={{ display: 'flex', background: `hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`, height: '100vh', width: '100vw', overflow: 'hidden' }}> */}
+
+
             <div className='home' style={{
-                background: `linear-gradient(168.63deg, hsl(${hsl.h},${hsl.s}%,${hsl.l}%)0%, hsl(${hslSec.h},${hslSec.s}%,${hslSec.l}%) 99.26%)`,
-                color: textColor,
+                background: `#6D597A`,
+                color: '#fff',
                 font: textColor,
                 opacity: load ? 1 : 0,
                 transition: "opacity 1s ease"
             }}>
-                <button onClick={() => { setSettings(!settings) }} className='home-settings-btn'>
-                    <IconSettings s={15} />
-                </button>
-                <Header />
-                <Current />
-                <div className='home-forecast'>
-                    <Forecast />
+                <div className='home-settings' style={{ transform: `translateX(${0}%)` }}>
+                    <div className='home-settings-card'>
+
+                        <button onClick={() => { setSettings(!settings) }} className='home-settings-card-close' style={{ fill: textColor }}>
+                            <CommonIcons s={20} icon='cross'/>
+                        </button>
+                        <button onClick={changeLocation} className='home-settings-card-reset'>Reset</button>
+                    </div>
                 </div>
+                <button onClick={() => { setSettings(!settings) }} className='home-settings-btn'>
+                    <CommonIcons s={20} icon='settings' />
+                </button>
+                <div className='home-weather'>
+                    <Current />
+                    {/* <Header desktop={desktop} changeLocation={changeLocation} />
+                    <Forecast /> */}
+                </div>
+
             </div>
+            {/* </div> */}
 
 
         </ForecastContext.Provider>

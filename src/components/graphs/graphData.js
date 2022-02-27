@@ -4,6 +4,8 @@ import { GlobalData } from "../../context/contexts"
 export function useGraphData(dataType, graph) {
     const { data } = useContext(GlobalData)
     const [arr, setArr] = useState()
+    const [pArr, setPArr] = useState() //Precipitation Array 
+    const [pYArr, setPYArr] = useState()
     const [min, setMin] = useState()
     const [max, setMax] = useState()
     const [yLeg, setYLegend] = useState()
@@ -28,6 +30,7 @@ export function useGraphData(dataType, graph) {
     }
 
     useEffect(() => {
+
         setArr(dataType.slice(0, 7).map(m => {
             switch (graph) {
                 case "temp":
@@ -38,8 +41,8 @@ export function useGraphData(dataType, graph) {
                     return m.snow ? m.snow["1h"] ? m.snow["1h"] : m.snow : 0
                 case 'humidity':
                     return m.humidity
-                case 'preci':
-                    return Math.round(m.pop * 100)
+                // case 'preci':
+                //     return Math.round(m.pop * 100)
                 case 'uvi':
                     return Math.round(m.uvi)
                 case 'wind':
@@ -49,6 +52,11 @@ export function useGraphData(dataType, graph) {
 
             }
         }))
+
+        setPArr(dataType.slice(0, 7).map( m =>{
+            return Math.round(m.pop * 100)
+        }))
+
 
         setIcon(dataType.slice(0, 7).map(m => {
             return { clouds: m.clouds, rain: m.rain ? true : false, snow: m.snow ? true : false, id: m.weather[0].id, day: setHourlyIcon(m) }
@@ -92,12 +100,14 @@ export function useGraphData(dataType, graph) {
                     setMin(0)
                     break
                 default:
+                    setMax(100)
+                    setMin(0)
                     break
 
             }
         }
 
-    }, [arr, graph])
+    }, [arr, graph, pYArr])
 
     useEffect(() => {
         if (max) {
@@ -136,6 +146,9 @@ export function useGraphData(dataType, graph) {
                     setYArr(arr.map(m => {
                         return 100 - (m * (100 / max))
                     }))
+                    setPYArr(pArr.map(m => {
+                        return 100 - m
+                    }))
                     break
                 case 'humidity':
                 case 'preci':
@@ -165,7 +178,9 @@ export function useGraphData(dataType, graph) {
 
             }
         }
+   
 
-    }, [graph, min, max, arr])
-    return [arr, yLeg, yArr, rain, snow, icon, windDeg]
+    }, [graph, min, max, arr, pArr])
+   
+    return [arr, yLeg, yArr, rain, snow, icon, windDeg, pArr, pYArr]
 }

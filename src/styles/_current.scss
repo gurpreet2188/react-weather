@@ -9,15 +9,19 @@
             flex-direction: column;
             justify-content: center;
             gap: 1rem;
-            @include respond-to(phonesmall) {
-                margin: auto;
-            }
+            // @include respond-to(phonesmall) {
+            //     margin: auto;
+            // }
 
             &-common {
                 display: flex;
                 flex-direction: column;
                 gap: 0.1rem;
                 opacity: 0.4;
+                
+                @include size (desktop) {
+                    font-size: 1.4rem;
+                }
             }
 
             &-high {
@@ -39,9 +43,13 @@
             font-size: 3rem;
             opacity: 0.3;
 
-            @include respond-to(phonesmall) {
-                font-size: 1.8rem;
-                margin: auto;
+            // @include respond-to(phonesmall) {
+            //     font-size: 1.8rem;
+            //     margin: auto;
+            // }
+
+            @include size (desktop) {
+                font-size: 4rem;
             }
         }
     }

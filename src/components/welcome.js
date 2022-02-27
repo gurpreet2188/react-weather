@@ -1,37 +1,52 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext, forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { motion } from 'framer-motion/dist/framer-motion';
 import { latlonData } from '../context/setData';
 import { gpsLoction } from '../fetch/gpslocation';
 import { ipLocation } from '../fetch/ipLocation';
 import { namePlace } from '../fetch/namePlace';
-import { IconArrowUpDown } from './svg/iconArrow';
-import { IconCross } from './svg/iconCross';
-import { IconLocation } from './svg/iconLocation';
-import { IconSearch } from './svg/iconSearch';
+import { CommonIcons } from './svg/commonIcons';
+import { IconWeatherAll } from './svg/iconWeatherAll';
 
 
 export function Welcome({ load }) {
     const [city, setCity] = useState()
     const [ipErr, setIpErr] = useState()
     const [GPSerr, setGPSErr] = useState()
-    const [search, setSearch] = useState()
+    const [searchCard, setSearchCard] = useState(false)
     const [searchErr, setSearchErr] = useState()
     const [searchResults, setSearchResults] = useState()
     const [searchReady, setSearchReady] = useState(false)
     const [inputVal, setInputVal] = useState('')
     const [location, setLocation] = useState(true)
     const [locIndex, setLocIndex] = useState()
-    const {latlon ,setlatlon} = useContext(latlonData)
+    const { latlon, setlatlon } = useContext(latlonData)
+    const [focus, setFocus] = useState(false)
+
+    const [locOption, setLocOption] = useState(false)
+    const [searchOption, setSearchOption] = useState(false)
 
     const gpsErrColor = GPSerr ? "red" : "#000"
     const ipErrColor = ipErr ? "red" : "#000"
 
     useEffect(() => {
         if (city) {
-            namePlace(city, setlatlon, setSearchResults, locIndex)
+            namePlace(city, setSearchResults)
         }
     }, [city, locIndex])
 
+
+    useEffect(() => {
+        if (locIndex !== undefined) {
+            localStorage.setItem('location', JSON.stringify({
+                city: searchResults[locIndex].name,
+                state: searchResults[locIndex].state,
+                country: searchResults[locIndex].country,
+                lat: searchResults[locIndex].lat,
+                lon: searchResults[locIndex].lon
+            }))
+            setlatlon(true)
+        }
+    }, [searchOption, searchResults])
 
     const onSubmitSearch = (e) => {
         e.preventDefault()
@@ -39,43 +54,109 @@ export function Welcome({ load }) {
         setLocation(false)
     }
 
+
+    const clearBtn = () => {
+        if (inputVal) {
+            setInputVal('')
+        }
+
+    }
+
+    const optionsTranslate = {
+        transform: `translateX(${locOption ? '20%' : searchOption ? '-20%' : 'calc(100vw / 20)'}) translateY(${load ? '300%' : '0'})`,
+        opacity: load ? 0 : 1
+    }
+
+    const iconTransform = {
+        // transform: `scale(${load ? 10 : 1})`,
+        opacity: load ? 0 : 0.5,
+        transformOrigin: 'center'
+    }
+
+    console.log(locIndex)
+
+    const btnStyle = `
+        .btn-border {
+            border: 1px solid rgba(var(--color-fg), ${locOption || searchOption ? 0.0 : 0.5});
+        }
+    `
+
     return (
-        <div style={{ background: "linear-gradient(168.63deg, #FFCA99 0%, rgba(153, 206, 255, 0.38) 99.26%)", opacity: load ? 1 : 0, transition: "opacity 1s ease" }} className='welcome'>
-            <h1 className='welcome-title'>Weather</h1>
-            <div className='welcome-card'>
-                <h3 className='welcome-card-title'>City</h3>
-                <form className='welcome-card-search' style={{ fill: "#000" }} onSubmit={onSubmitSearch}>
-                    <div className='welcome-card-search-icon'>
-                        <IconSearch s={15} />
+        <>
+            <style>
+                {btnStyle}
+            </style>
+            <div className='welcome'>
+                <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 1 }} className='welcome-main'>
+                    <motion.div 
+                    animate={{ rotate: load ? 360 : 180, opacity: load ? 0 : 0.2,  scale: load ? 40 : 1}} 
+                    transition={{ duration: 2 }} 
+                    initial={{ opacity: 1 }} 
+                    exit={{ opacity: 0.2 }} 
+                    className='welcome-main-image' 
+                    style={{ ...iconTransform }}>
+                        <IconWeatherAll size={85} rain={false} snow={false} id={0} clouds={0} day={true} anim={true} />
+                    </motion.div>
+
+                    <div className='welcome-main-options' style={{ ...optionsTranslate }}>
+                        <div className='welcome-main-options-location'>
+                            <div className={`welcome-main-options-location-btns`} style={{ transform: `translateX(${locOption ? '0%' : '-100%'})` }}>
+                                <CommonIcons s={22} icon='location' />
+                                <button onClick={() => {
+                                    gpsLoction(setlatlon, setGPSErr)
+                                }} className='welcome-main-options-location-btns-btn'>Precise</button>
+                                <button onClick={() => {
+                                    ipLocation(setCity, setIpErr, setLocIndex)
+
+                                }} className='welcome-main-options-location-btns-btn'>Approx</button>
+                                <motion.div className='welcome-main-options-location-btns-err' animate={{ opacity: (ipErr || GPSerr) ? 1 : 0 }} initial={{ opacity: 0 }} exit={{ opacity: 1 }}>
+                                    <p>Error!:{ipErr ? " 'Approx.' is Internet based location data, some browsers and/or ad blockers block it." :
+                                        " 'Precise' requires GPS permission to work."} </p>
+                                </motion.div>
+                            </div>
+                            <button onClick={() => {
+                                setLocOption(!locOption)
+                                setSearchOption(false)
+                                setGPSErr()
+                                setIpErr()
+                            }} className='welcome-main-options-location-btn btn-border'>
+                                <CommonIcons s={locOption ? 18 : 24} icon={locOption ? 'cross' : 'location'} />
+                            </button>
+                        </div>
+                        <span className='welcome-main-options-divider' ></span>
+                        <div className='welcome-main-options-search'>
+
+                            <div className='welcome-main-options-search-main'>
+                                <button onClick={() => {
+                                    setSearchOption(!searchOption)
+                                    setLocOption(false)
+                                }} className='welcome-main-options-search-main-btn btn-border'>
+                                    <CommonIcons s={searchOption ? 24 : 24} icon='search' />
+                                </button>
+                                <form className='welcome-main-options-search-main-form' onSubmit={onSubmitSearch} style={{ transform: `translateX(${searchOption ? '0%' : '100%'})` }}>
+                                    <input className='welcome-main-options-search-main-form-input' value={inputVal} onChange={(e) => { setInputVal(e.target.value) }} placeholder='Search City...'></input>
+                                    <button type='submit' className='welcome-main-options-search-main-form-input-btn' disabled={inputVal === '' ? true : false} style={{ opacity: inputVal === '' ? 0.5 : 1 }}>
+                                        <CommonIcons s={18} icon='arrow' />
+                                    </button>
+                                </form>
+                            </div>
+
+                            <motion.div className='welcome-main-options-search-results' animate={{ y: (searchResults && searchOption) ? 0 : 500, opacity: (searchResults && searchOption) ? 1 : 0 }} initial={{ y: 500, opacity: 0 }} exit={{ y: 0, opacity: 1, x: 100 }} transition={{ duration: 0.1 }}>
+                                {searchResults ? searchResults.map((m, i) => {
+                                    return <button key={i} onClick={() => { setLocIndex(i) }} disabled={m.err === true ? true : false} className='welcome-main-options-search-results-btn'><span>{m.name}</span><br /> {m.state ? m.state + ' /' : ""} {m.country}</button>
+                                }) : null}
+                            </motion.div>
+
+
+                        </div>
+
                     </div>
-                    <input className='welcome-card-search-input' value={inputVal} placeholder='Enter city name...' onChange={(e)=> {setInputVal(e.target.value)}} />
-                    {searchResults ? <button onClick={() => {
-                        setInputVal('')
-                        setSearchResults()
-                    }}
-                        className='welcome-card-search-input-btn-close'
-                        style={{ fill: '#000' }}>
-                        <IconCross s={12} />
-                    </button> :
-                        <button type='submit' className='welcome-card-search-input-btn' style={{ stroke: '#000', opacity: search ? 0.4 : 0.2 }}><IconArrowUpDown w={13} h={13} /></button>}
-                </form>
-                <div className='welcome-card-search-results' style={{ opacity: searchResults ? 1 : 0 }}>
-                    {searchResults ? searchResults.map((m, i) => {
-                        return <button key={i} onClick={()=>{setLocIndex(i)}} className='welcome-card-search-results-btn'>{m.name} / {m.state ? m.state + ' /' : ""} {m.country}</button>
-                    }) : null}
-                </div>
-                <div className='welcome-card-location'>
-                    <div className='welcome-card-location-icon' style={{ fill: "#000", stroke: "#000" }}>
-                        <IconLocation s={15} />
-                    </div>
-                    <button onClick={ ()=>{
-                        gpsLoction(setlatlon, setGPSErr)
-                    }} className='welcome-card-location-btn'>Precise</button>
-                    <button onClick={()=> {
-                        ipLocation(setCity, setIpErr)
-                        setLocIndex(0)}} className='welcome-card-location-btn'>Approx.</button>
-                </div>
+
+                </motion.div>
+
             </div>
-        </div>
+        </>
     )
 }
+
+//style={{ opacity: searchResults ? 1 : 0, display: searchOption ? "" : 'none' }}

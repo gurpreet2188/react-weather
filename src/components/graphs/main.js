@@ -9,7 +9,7 @@ export function Graphs({ type, poly, setPoly, setShowSnow, setShowRain, graph })
     const { data } = useContext(GlobalData)
     const [dataType, setDataType] = useState(data.hourly)
     const [stat, setStat] = useState(false)
-    const [arr, yLeg, yArr, rain, snow, icon, windDeg] = useGraphData(dataType, graph)
+    const [arr, yLeg, yArr, rain, snow, icon, windDeg, pArr, pYArr] = useGraphData(dataType, graph)
 
     useEffect(() => {
         type === 'h' ? setDataType(data.hourly) : setDataType(data.daily)
@@ -26,10 +26,10 @@ export function Graphs({ type, poly, setPoly, setShowSnow, setShowRain, graph })
         }
     }, [yArr, rain, snow])
 
-    const [xLegend, yLegend, points, dots, value, icons] = useBase(arr, yArr, yLeg, data, type, graph, icon, windDeg)
+    const [xLegend, yLegend, points, dots, value, icons, pBar, pValue] = useBase(arr, yArr, yLeg, data, type, graph, icon, windDeg, pArr, pYArr)
     return (
         <div className='forecast-data-chart'>
-            {stat ? <Graph points={points} axisX={xLegend} axisY={yLegend} show={poly} dots={dots} info={value} icon={icons} graph={graph} /> : null}
+            {stat ? <Graph points={points} axisX={xLegend} axisY={yLegend} show={poly} dots={dots} info={value} icon={icons} graph={graph} snowRain={pBar} pValue={pValue} /> : null}
         </div >
     )
 }
