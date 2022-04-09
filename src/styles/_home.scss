@@ -1,7 +1,6 @@
 .home {
     display: flex;
     flex-direction: column;
-    // padding: 2rem;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -18,6 +17,8 @@
         &-btn {
             position: absolute;
             opacity: 1;
+            top: 2rem;
+            left: 2rem;
         }
 
 
@@ -39,35 +40,65 @@
                 opacity: 0.5;
                 stroke: var(--color-bg);
             }
-    
+
             &-reset {
                 color: #fff;
-                
+
             }
 
         }
 
     }
 
-    &-weather {
+    &-current {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
 
         &-image {
             align-self: flex-end;
+            opacity: 0.5;
+            margin-right: -2rem;
         }
 
         &-stats {
             align-self: flex-start;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            &-row {
+                align-self: flex-start;
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                letter-spacing: 0.05rem;
+
+                &-image {
+                    align-self: flex-start;
+                }
+            }
         }
 
         &-temp {
             align-self: flex-end;
             display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
 
+            &-highlow{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
 
-
+            &-main {
+                font-size: 5rem;
+            }
         }
     }
 

@@ -22,14 +22,14 @@
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="0"
      inkscape:document-units="px"
-     showgrid="true"
+     showgrid="false"
      units="px"
      width="24px"
-     inkscape:zoom="22.627417"
-     inkscape:cx="5.6347572"
-     inkscape:cy="11.578874"
+     inkscape:zoom="16"
+     inkscape:cx="-8.34375"
+     inkscape:cy="11.21875"
      inkscape:window-width="1920"
-     inkscape:window-height="1021"
+     inkscape:window-height="1014"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -763,8 +763,8 @@
      inkscape:label="deg">
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.314808;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 5.587995,5.5879901 H 0.76199508 L 3.1749949,0.76199028 5.587995,5.5879901"
+       d="M 5.587995,5.5879901 3.1594698,3.7522179 0.76199508,5.5879901 3.1749949,0.76199028 5.587995,5.5879901"
        id="path1230-3"
-       sodipodi:nodetypes="cccc" />
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>

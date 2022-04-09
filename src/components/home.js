@@ -33,13 +33,13 @@ export function Home() {
 
 
             <div className='home' style={{
-                background: `#6D597A`,
-                color: '#fff',
-                font: textColor,
+                // background: `#6D597A`,
+                // color: '#fff',
+                // font: textColor,
                 opacity: load ? 1 : 0,
                 transition: "opacity 1s ease"
             }}>
-                <div className='home-settings' style={{ transform: `translateX(${0}%)` }}>
+                <div className='home-settings' style={{ transform: `translateX(${0}%)`, display: settings ? '' : 'none' }}>
                     <div className='home-settings-card'>
 
                         <button onClick={() => { setSettings(!settings) }} className='home-settings-card-close' style={{ fill: textColor }}>

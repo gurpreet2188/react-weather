@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion } from 'framer-motion';
 import { latlonData } from '../context/setData';
 import { gpsLoction } from '../fetch/gpslocation';
 import { ipLocation } from '../fetch/ipLocation';
 import { namePlace } from '../fetch/namePlace';
 import { CommonIcons } from './svg/commonIcons';
-import { IconWeatherAll } from './svg/iconWeatherAll';
+// import { IconWeatherAll } from './svg/iconWeatherAll';
+import { WeatherIcons } from './svg/weatherIcons';
 
 
 export function Welcome({ load }) {
@@ -33,6 +34,12 @@ export function Welcome({ load }) {
             namePlace(city, setSearchResults)
         }
     }, [city, locIndex])
+
+    useEffect(()=>{
+        if(inputVal === ''){
+            setCity()
+        }
+    },[inputVal])
 
 
     useEffect(() => {
@@ -95,7 +102,7 @@ export function Welcome({ load }) {
                     exit={{ opacity: 0.2 }} 
                     className='welcome-main-image' 
                     style={{ ...iconTransform }}>
-                        <IconWeatherAll size={85} rain={false} snow={false} id={0} clouds={0} day={true} anim={true} />
+                       <WeatherIcons s={85} icon='sun'/>
                     </motion.div>
 
                     <div className='welcome-main-options' style={{ ...optionsTranslate }}>
@@ -104,14 +111,15 @@ export function Welcome({ load }) {
                                 <CommonIcons s={22} icon='location' />
                                 <button onClick={() => {
                                     gpsLoction(setlatlon, setGPSErr)
+                                    setIpErr()
                                 }} className='welcome-main-options-location-btns-btn'>Precise</button>
                                 <button onClick={() => {
                                     ipLocation(setCity, setIpErr, setLocIndex)
+                                    setGPSErr()
 
                                 }} className='welcome-main-options-location-btns-btn'>Approx</button>
                                 <motion.div className='welcome-main-options-location-btns-err' animate={{ opacity: (ipErr || GPSerr) ? 1 : 0 }} initial={{ opacity: 0 }} exit={{ opacity: 1 }}>
-                                    <p>Error!:{ipErr ? " 'Approx.' is Internet based location data, some browsers and/or ad blockers block it." :
-                                        " 'Precise' requires GPS permission to work."} </p>
+                                    <p>{ipErr || GPSerr ? `${GPSerr ? "GPS " : ipErr ? '' : ''}Error!!: Please try the other location methods or use Search.`: ""} </p>
                                 </motion.div>
                             </div>
                             <button onClick={() => {
@@ -135,9 +143,15 @@ export function Welcome({ load }) {
                                 </button>
                                 <form className='welcome-main-options-search-main-form' onSubmit={onSubmitSearch} style={{ transform: `translateX(${searchOption ? '0%' : '100%'})` }}>
                                     <input className='welcome-main-options-search-main-form-input' value={inputVal} onChange={(e) => { setInputVal(e.target.value) }} placeholder='Search City...'></input>
-                                    <button type='submit' className='welcome-main-options-search-main-form-input-btn' disabled={inputVal === '' ? true : false} style={{ opacity: inputVal === '' ? 0.5 : 1 }}>
-                                        <CommonIcons s={18} icon='arrow' />
-                                    </button>
+                                    {searchResults && inputVal && city ? <button className='welcome-main-options-search-main-form-input-btn' onClick={()=>{
+                                        setInputVal('')
+                                        setCity()
+                                    }}>
+                                        <CommonIcons s={18} icon='cross'/>
+                                    </button>:  <button type='submit' className='welcome-main-options-search-main-form-input-btn' disabled={inputVal === '' ? true : false} style={{ opacity: inputVal === '' ? 0.5 : 1 }}>
+                                        <CommonIcons s={18} icon='arrow'/>
+                                    </button>}
+                                   
                                 </form>
                             </div>
 
