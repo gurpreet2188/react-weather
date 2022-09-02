@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { IconContext } from 'react-icons'
 import { RiSettings5Line } from 'react-icons/ri'
 
-function Settings() {
+function Settings({setCurrentData, setOneCall}) {
     const [panel, setPanel] = useState(false)
     return (
         <>
