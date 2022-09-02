@@ -10,7 +10,7 @@ function WeatherInfo({ currentData }) {
             console.log('condition icon')
             return true
         }
-
+        
         return false
     }
     console.log(currentData?.weather['0']?.id)
